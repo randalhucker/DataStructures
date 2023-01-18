@@ -5,11 +5,11 @@ using namespace std;
 
 int main()
 {
-	const int NUM_DIVS = 3;           // Number of divisions
-	const int NUM_QTRS = 4;           // Number of quarters
+	const int NUM_DIVS = 3;			  // Number of divisions
+	const int NUM_QTRS = 4;			  // Number of quarters
 	double sales[NUM_DIVS][NUM_QTRS]; // Array with 3 rows and 4 columns.
-	double totalSales = 0;            // To hold the total sales.
-	int div, qtr;                     // Loop counters.
+	double totalSales = 0;			  // To hold the total sales.
+	int div, qtr;					  // Loop counters.
 
 	cout << "This program will calculate the total sales of\n";
 	cout << "all the company's divisions.\n";
@@ -30,22 +30,23 @@ int main()
 
 	cout << fixed << showpoint << setprecision(2);
 	cout << "The sales for the company is: $" << endl;
-	cout << setw(2) << "Div" << "\t";
-	cout << setw(2) << " Q1" << "\t";
-	cout << setw(2) << " Q2" << "\t";
-	cout << setw(2) << " Q3" << "\t";
-	cout << setw(2) << " Q4" << endl;
-
-
+	cout << setw(2) << "Div"
+		 << "\t";
+	cout << setw(2) << "Q1"
+		 << "\t";
+	cout << setw(2) << "Q2"
+		 << "\t";
+	cout << setw(2) << "Q3"
+		 << "\t";
+	cout << setw(2) << "Q4" << endl;
 
 	// Nested loops to display the quarterly sales figures for each division.
 	for (div = 0; div < NUM_DIVS; div++)
 	{
-		cout << div+1 << "\t";
+		cout << div + 1 << "\t";
 		for (qtr = 0; qtr < NUM_QTRS; qtr++)
 		{
 			totalSales += sales[div][qtr];
-			cout << fixed << showpoint << setprecision(2);
 			cout << "$" << sales[div][qtr] << "\t";
 		}
 		cout << endl; // Print blank line.
