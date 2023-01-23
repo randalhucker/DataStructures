@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <array>
+#include <algorithm>
 using namespace std;
 
 struct Book
@@ -45,12 +46,13 @@ void print_book_data(const string &fileName, Book &b, char &printFrequency, bool
     if (printFrequency == 'Y')
     {
         char c = 97;
-        destFile << "Moby Dick letter frequency:";
-        destFile << setprecision(2) << endl;
+        b.Title.erase(remove(b.Title.begin(), b.Title.end(), '\r'), b.Title.end());
+        destFile << (b.Title + " letter frequency:");
+        destFile << setprecision(3) << endl;
         for (int i = 0; i < 26; i++)
         {
-            destFile << c << ": " << (b.letterFreq[i] / b.totalChars) << "%" << endl;
-            c += 1;
+            destFile << c << ": " << ((b.letterFreq[i] / b.totalChars) * 100) << "%" << endl;
+            c++;
         }
     }
     destFile.close();
@@ -62,6 +64,7 @@ void body_function()
     ifstream targetFile;
     cout << "Please Enter the File Name: ";
     cin >> fileName;
+    //fileName = "PeterPan.txt";
 
     targetFile.open(fileName);
 
@@ -79,16 +82,17 @@ void body_function()
 
     getline(targetFile, b.Title);
     getline(targetFile, b.firstName, ' ');
-    getline(targetFile, b.lastName, '\r');
+    getline(targetFile, b.lastName, '\n');
 
-    string contentsWatch;
+    string contentsWatch = "";
 
-    while (contentsWatch != "Contents:\r")
+    while (contentsWatch != "Contents:" && contentsWatch != "Contents: " && contentsWatch != "Contents:\r")
     {
         getline(targetFile, contentsWatch);
     }
 
     char c;
+    int flag = 0;
 
     while (!targetFile.eof())
     {
@@ -98,118 +102,132 @@ void body_function()
         {
             c += 32;
         }
+        if (targetFile.eof())
+        {
+            break;
+        }
+
+        if (flag == 1)
+        {
+            if (c >= 97 && c <= 122)
+            {
+                b.WC++;
+                flag = 0;
+            }
+        }
 
         switch (c)
         {
         case 10:
-            b.LC += 1;
+            b.LC++;
+            flag = 1;
             break;
         case 32:
-            b.WC += 1;
+            b.WC++;
             break;
         case 97:
-            b.letterFreq[0] += 1;
-            b.totalChars += 1;
+            b.letterFreq[0]++;
+            b.totalChars++;
             break;
         case 98:
-            b.letterFreq[1] += 1;
-            b.totalChars += 1;
+            b.letterFreq[1]++;
+            b.totalChars++;
             break;
         case 99:
-            b.letterFreq[2] += 1;
-            b.totalChars += 1;
+            b.letterFreq[2]++;
+            b.totalChars++;
             break;
         case 100:
-            b.letterFreq[3] += 1;
-            b.totalChars += 1;
+            b.letterFreq[3]++;
+            b.totalChars++;
             break;
         case 101:
-            b.letterFreq[4] += 1;
-            b.totalChars += 1;
+            b.letterFreq[4]++;
+            b.totalChars++;
             break;
         case 102:
-            b.letterFreq[5] += 1;
-            b.totalChars += 1;
+            b.letterFreq[5]++;
+            b.totalChars++;
             break;
         case 103:
-            b.letterFreq[6] += 1;
-            b.totalChars += 1;
+            b.letterFreq[6]++;
+            b.totalChars++;
             break;
         case 104:
-            b.letterFreq[7] += 1;
-            b.totalChars += 1;
+            b.letterFreq[7]++;
+            b.totalChars++;
             break;
         case 105:
-            b.letterFreq[8] += 1;
-            b.totalChars += 1;
+            b.letterFreq[8]++;
+            b.totalChars++;
             break;
         case 106:
-            b.letterFreq[9] += 1;
-            b.totalChars += 1;
+            b.letterFreq[9]++;
+            b.totalChars++;
             break;
         case 107:
-            b.letterFreq[10] += 1;
-            b.totalChars += 1;
+            b.letterFreq[10]++;
+            b.totalChars++;
             break;
         case 108:
-            b.letterFreq[11] += 1;
-            b.totalChars += 1;
+            b.letterFreq[11]++;
+            b.totalChars++;
             break;
         case 109:
-            b.letterFreq[12] += 1;
-            b.totalChars += 1;
+            b.letterFreq[12]++;
+            b.totalChars++;
             break;
         case 110:
-            b.letterFreq[13] += 1;
-            b.totalChars += 1;
+            b.letterFreq[13]++;
+            b.totalChars++;
             break;
         case 111:
-            b.letterFreq[14] += 1;
-            b.totalChars += 1;
+            b.letterFreq[14]++;
+            b.totalChars++;
             break;
         case 112:
-            b.letterFreq[15] += 1;
-            b.totalChars += 1;
+            b.letterFreq[15]++;
+            b.totalChars++;
             break;
         case 113:
-            b.letterFreq[16] += 1;
-            b.totalChars += 1;
+            b.letterFreq[16]++;
+            b.totalChars++;
             break;
         case 114:
-            b.letterFreq[17] += 1;
-            b.totalChars += 1;
+            b.letterFreq[17]++;
+            b.totalChars++;
             break;
         case 115:
-            b.letterFreq[18] += 1;
-            b.totalChars += 1;
+            b.letterFreq[18]++;
+            b.totalChars++;
             break;
         case 116:
-            b.letterFreq[19] += 1;
-            b.totalChars += 1;
+            b.letterFreq[19]++;
+            b.totalChars++;
             break;
         case 117:
-            b.letterFreq[20] += 1;
-            b.totalChars += 1;
+            b.letterFreq[20]++;
+            b.totalChars++;
             break;
         case 118:
-            b.letterFreq[21] += 1;
-            b.totalChars += 1;
+            b.letterFreq[21]++;
+            b.totalChars++;
             break;
         case 119:
-            b.letterFreq[22] += 1;
-            b.totalChars += 1;
+            b.letterFreq[22]++;
+            b.totalChars++;
             break;
         case 120:
-            b.letterFreq[23] += 1;
-            b.totalChars += 1;
+            b.letterFreq[23]++;
+            b.totalChars++;
             break;
         case 121:
-            b.letterFreq[24] += 1;
-            b.totalChars += 1;
+            b.letterFreq[24]++;
+            b.totalChars++;
             break;
         case 122:
-            b.letterFreq[25] += 1;
-            b.totalChars += 1;
+            b.letterFreq[25]++;
+            b.totalChars++;
             break;
         default:
             break;
@@ -217,14 +235,14 @@ void body_function()
     }
     targetFile.close(); // Close File
 
-    b.WC += 1; // Account for last word w/out a space.
+    b.WC++; // Account for last word w/out a space.
 
     char frequencyBool;
 
     cout << "Would you like to see letter frequency?(Y/N)";
     cin >> frequencyBool;
 
-    frequencyBool = 'Y';
+    // frequencyBool = 'Y';
 
     while (frequencyBool != 'Y' && frequencyBool != 'N')
     {

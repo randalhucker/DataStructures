@@ -39,6 +39,8 @@
     "ostream": "cpp",
     "__tuple": "cpp",
     "array": "cpp",
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "istream": "cpp",
+    "algorithm": "cpp"
   }
 }
