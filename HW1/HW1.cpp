@@ -45,23 +45,23 @@ void print_book_data(const string &fileName, Book &b, char &printFrequency, bool
     if (printFrequency == 'Y')
     {
         char c = 97;
-        destFile << "Moby Dick letter frequency:" << endl;
+        destFile << "Moby Dick letter frequency:";
         destFile << setprecision(2) << endl;
-        for (int i = 0; i < 27; i++)
+        for (int i = 0; i < 26; i++)
         {
-            double percentage = (b.letterFreq[i] / b.totalChars);
-            destFile << (c + i) << ": " << percentage << "%" << endl;
+            destFile << c << ": " << (b.letterFreq[i] / b.totalChars) << "%" << endl;
+            c += 1;
         }
     }
+    destFile.close();
 }
 
-int main()
+void body_function()
 {
     string fileName;
     ifstream targetFile;
-    // cout << "Please Enter the File Name: ";
-    fileName = "MobyDick.txt";
-    // cin >> fileName;
+    cout << "Please Enter the File Name: ";
+    cin >> fileName;
 
     targetFile.open(fileName);
 
@@ -221,8 +221,8 @@ int main()
 
     char frequencyBool;
 
-    // cout << "Would you like to see letter frequency?(Y/N)";
-    // cin >> frequencyBool;
+    cout << "Would you like to see letter frequency?(Y/N)";
+    cin >> frequencyBool;
 
     frequencyBool = 'Y';
 
@@ -235,6 +235,27 @@ int main()
     bool fileExists = exists("CardCatalog.txt");
 
     print_book_data("CardCatalog.txt", b, frequencyBool, fileExists);
+}
+
+int main()
+{
+    char anotherBook = 'Y';
+    body_function();
+
+    cout << "Do another book?(Y/N)";
+    cin >> anotherBook;
+
+    while (anotherBook == 'Y')
+    {
+        body_function();
+        cout << "Do another book?(Y/N)";
+        cin >> anotherBook;
+        while (anotherBook != 'Y' && anotherBook != 'N')
+        {
+            cout << "Please enter Y or N.";
+            cin >> anotherBook;
+        }
+    }
 
     return 0;
 }
