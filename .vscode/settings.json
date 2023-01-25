@@ -41,6 +41,8 @@
     "array": "cpp",
     "iosfwd": "cpp",
     "istream": "cpp",
-    "algorithm": "cpp"
+    "algorithm": "cpp",
+    "filesystem": "cpp",
+    "bitset": "cpp"
   }
 }

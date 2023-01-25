@@ -1,66 +1,89 @@
 // This program produces a sales report for DLC, Inc.
 #include <iostream>
 #include <iomanip>
+#include <fstream>
+#include "Product.h"
+
 using namespace std;
 
-// NUM_PRODS is the number of products produced.
-const int NUM_PRODS = 9;
-
-struct product
-{
-    int id;
-    int units;
-    double prices;
-    double sales;
-};
-
 // Function prototypes
-void calcSales(product[], int);
-void showOrder(product[], int);
-void dualSort(product[], int);
-void showTotals(product[], int);
+void calcSales(Product[], int);
+void showOrder(Product[], int);
+void dualSort(Product[], int);
+void showTotals(Product[], int);
 
 int main()
 {
-    // OLD ARRAYS: used to initialize array of structures to avoid extra typing
-    // Array with product ID numbers
-    int id[NUM_PRODS] = { 914, 915, 916, 917, 918, 919, 920,
-                         921, 922 };
 
-    // Array with number of units sold for each product
-    int units[NUM_PRODS] = { 842, 416, 127, 514, 437, 269, 97,
-                            492, 212 };
+    string Filename; // Name of the file
+    cout << "Enter Product Filename: " << endl;
+    cin >> Filename;
 
-    // Array with product prices
-    double prices[NUM_PRODS] = { 12.95, 14.95, 18.95, 16.95, 21.95,
-                                31.95, 14.95, 14.95, 16.95 };
-    
-    //Array of products to hold id, units, prices, and sales for each product 
-    product ProductArray[NUM_PRODS];
-    //Initialize ProductArray with values from old arrays
-    for (int i = 0; i < NUM_PRODS; i++)
+    string line;
+    int TotalProducts;
+    int count = 0;
+    ifstream ProductFile(Filename);
+
+    while (!ProductFile.eof())
     {
-        ProductArray[i].id = id[i];
-        ProductArray[i].units = units[i];
-        ProductArray[i].prices = prices[i];
+        getline(ProductFile, line);
+        count++;
+    }
+
+    TotalProducts = ((count + 1) / 6);
+
+    ProductFile.seekg(0, ios::beg);
+
+    Product ProductArray[TotalProducts];
+
+    // Input ProductArray from file provided
+    for (int i = 0; i < TotalProducts; i++)
+    {
+        string temp;
+        getline(ProductFile, temp, ' ');
+        getline(ProductFile, temp);
+        ProductArray[i].setID(stoi(temp));
+
+        getline(ProductFile, temp, ' ');
+        getline(ProductFile, temp);
+        ProductArray[i].setUnits(stoi(temp));
+
+        getline(ProductFile, temp, ' ');
+        getline(ProductFile, temp);
+        ProductArray[i].setPrice(stod(temp));
+
+        getline(ProductFile, temp, ' ');
+        getline(ProductFile, temp);
+        ProductArray[i].setDescription(temp);
+
+        getline(ProductFile, temp, ' ');
+        getline(ProductFile, temp);
+        if (temp == "False")
+        {
+            ProductArray[i].setTaxExempt(false);
+        }
+        else
+        {
+            ProductArray[i].setTaxExempt(true);
+        }
     }
 
     // Calculate each product's sales.
-    calcSales(ProductArray, NUM_PRODS);
+    calcSales(ProductArray, TotalProducts);
 
     // Sort the elements in the sales array in descending
     // order and shuffle the ID numbers in the id array to
     // keep them in parallel.
-    dualSort(ProductArray, NUM_PRODS);
+    dualSort(ProductArray, TotalProducts);
 
     // Set the numeric output formatting.
     cout << setprecision(2) << fixed << showpoint;
 
     // Display the products and sales amounts.
-    showOrder(ProductArray, NUM_PRODS);
+    showOrder(ProductArray, TotalProducts);
 
     // Display total units sold and total sales.
-    showTotals(ProductArray, NUM_PRODS);
+    showTotals(ProductArray, TotalProducts);
     return 0;
 }
 
@@ -71,11 +94,12 @@ int main()
 // product's sales by multiplying its units sold by each unit's  *
 // price. The result is stored in the sales array.               *
 //****************************************************************
-
-void calcSales(product p[], int num)
+void calcSales(Product p[], int num)
 {
     for (int index = 0; index < num; index++)
-        p[index].sales = p[index].units * p[index].prices;
+    {
+        p[index].setSales();
+    }
 }
 
 //***************************************************************
@@ -87,10 +111,10 @@ void calcSales(product p[], int num)
 // of elements in each array.                                   *
 //***************************************************************
 
-void dualSort(product p[], int size)
+void dualSort(Product p[], int size)
 {
     int startScan, maxIndex;
-    product temp;
+    Product temp;
     double maxValue;
 
     for (startScan = 0; startScan < (size - 1); startScan++)
@@ -99,7 +123,7 @@ void dualSort(product p[], int size)
         temp = p[startScan];
         for (int index = startScan + 1; index < size; index++)
         {
-            if (p[index].sales > temp.sales)
+            if (p[index].getSales() > temp.getSales())
             {
                 temp = p[index];
                 maxIndex = index;
@@ -117,14 +141,14 @@ void dualSort(product p[], int size)
 // of product numbers and sales.                                 *
 //****************************************************************
 
-void showOrder(product p[], int num)
+void showOrder(Product p[], int num)
 {
     cout << "Product Number\tSales\n";
     cout << "----------------------------------\n";
     for (int index = 0; index < num; index++)
     {
-        cout << p[index].id << "\t\t$";
-        cout << setw(8) << p[index].sales << endl;
+        cout << p[index].getID() << "\t\t$";
+        cout << setw(8) << p[index].getSales() << endl;
     }
     cout << endl;
 }
@@ -137,16 +161,16 @@ void showOrder(product p[], int num)
 // amounts.                                                       *
 //*****************************************************************
 
-void showTotals(product p[], int num)
+void showTotals(Product p[], int num)
 {
     int totalUnits = 0;
     double totalSales = 0.0;
 
     for (int index = 0; index < num; index++)
     {
-        totalUnits += p[index].units;
-        totalSales += p[index].sales;
+        totalUnits += p[index].getUnits();
+        totalSales += p[index].getSales();
     }
     cout << "Total units Sold:  " << totalUnits << endl;
     cout << "Total sales:      $" << totalSales << endl;
-} 
+}
