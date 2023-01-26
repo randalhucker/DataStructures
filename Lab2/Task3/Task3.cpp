@@ -16,13 +16,15 @@ int main()
 {
 
     string Filename; // Name of the file
-    cout << "Enter Product Filename: " << endl;
-    cin >> Filename;
-
+    ifstream ProductFile;
     string line;
     int TotalProducts;
     int count = 0;
-    ifstream ProductFile(Filename);
+
+    cout << "Enter Product Filename: ";
+    cin >> Filename;
+
+    ProductFile.open(Filename);
 
     while (!ProductFile.eof())
     {

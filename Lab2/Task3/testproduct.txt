@@ -15,15 +15,3 @@ Units: 333
 Price: 30.00
 Description: Blue widget used for powering devices.
 TaxExempt: False 
-
-ID: 917
-Units: 401
-Price: 14.12
-Description: Blue widget used for powering devices.
-TaxExempt: False 
-
-ID: 918
-Units: 122
-Price: 13.01
-Description: Blue widget used for powering devices.
-TaxExempt: False 
