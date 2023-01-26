@@ -47,11 +47,11 @@ void print_book_data(const string &fileName, Book &b, char &printFrequency, bool
     {
         char c = 97;
         b.Title.erase(remove(b.Title.begin(), b.Title.end(), '\r'), b.Title.end());
-        destFile << (b.Title + " letter frequency:");
-        destFile << setprecision(3) << endl;
+        cout << (b.Title + " letter frequency:");
+        cout << setprecision(3) << endl;
         for (int i = 0; i < 26; i++)
         {
-            destFile << c << ": " << ((b.letterFreq[i] / b.totalChars) * 100) << "%" << endl;
+            cout << c << ": " << ((b.letterFreq[i] / b.totalChars) * 100) << "%" << endl;
             c++;
         }
     }
@@ -64,7 +64,7 @@ void body_function()
     ifstream targetFile;
     cout << "Please Enter the File Name: ";
     cin >> fileName;
-    //fileName = "PeterPan.txt";
+    // fileName = "PeterPan.txt";
 
     targetFile.open(fileName);
 
@@ -266,11 +266,11 @@ int main()
     while (anotherBook == 'Y')
     {
         body_function();
-        cout << "Do another book?(Y/N)";
+        cout << "Do another book?(Y/N): ";
         cin >> anotherBook;
         while (anotherBook != 'Y' && anotherBook != 'N')
         {
-            cout << "Please enter Y or N.";
+            cout << "Please enter Y or N: ";
             cin >> anotherBook;
         }
     }
