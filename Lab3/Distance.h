@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 using namespace std;
 
 class Distance
@@ -10,10 +11,10 @@ private:
 
 public:
     // Constructors / destructor
-    Distance();                     // Default Constructor
+    Distance();             // Default Constructor
     Distance(int f, int i); // Fill constructor for imperial units
-    Distance(double m);        // Fill constructor for metric units
-    ~Distance();                    // Destructor
+    Distance(double m);     // Fill constructor for metric units
+    ~Distance();            // Destructor
 
     // Getters
     int getFeet();
@@ -34,14 +35,14 @@ public:
 
     // Task 3 Operator Overloads
     void operator+(Distance &D);
-    void operator-(const Distance &D);
-    void operator*(const Distance &D);
-    void operator/(const Distance &D);
-    bool operator==(const Distance &D);
+    void operator-(Distance &D);
+    void operator*(Distance &D);
+    void operator/(Distance &D);
+    bool operator==(Distance &D);
 
     // << overload
-    ostream& operator<<(ostream& os, const Date& dt);
+    ostream operator<<(ostream &os, const Distance &dt);
 
     // return distance in meters
-    double returnDistance() {return Meters;}
+    double returnDistance() { return Meters; }
 };

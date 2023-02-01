@@ -109,30 +109,36 @@ void Distance::operator+(Distance &D)
     UpdateImperial();
 }
 
-void Distance::operator-(const Distance &D)
+void Distance::operator-(Distance &D)
 {
     this->Meters -= D.Meters;
     this->UpdateImperial();
 }
 
-void Distance::operator*(const Distance &D)
+void Distance::operator*(Distance &D)
 {
     this->Meters *= D.Meters;
     this->UpdateImperial();
 }
 
-void Distance::operator/(const Distance &D)
+void Distance::operator/(Distance &D)
 {
     this->Meters /= D.Meters;
     this->UpdateImperial();
 }
 
-bool Distance::operator==(const Distance &D)
+bool Distance::operator==(Distance &D)
 {
     return (this->Meters == D.Meters && this->Inches == D.Inches && this->Feet == D.Inches);
 }
 
-string Distance::operator<<(const Distance &D)
+/* string Distance::operator<<(const Distance &D)
 {
     return (to_string(this->Meters) + " meters / " + to_string(this->Feet) + " feet " + to_string(this->Inches) + " inches ");
+} */
+
+ostream Distance::operator<<(ostream &os, const Distance &dt)
+{
+    os << to_string(Meters) << " meters / " << to_string(Feet) + " feet " << to_string(Inches) << " inches ";
+    return os;
 }
