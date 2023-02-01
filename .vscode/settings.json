@@ -43,6 +43,7 @@
     "istream": "cpp",
     "algorithm": "cpp",
     "filesystem": "cpp",
-    "bitset": "cpp"
+    "bitset": "cpp",
+    "chrono": "cpp"
   }
 }

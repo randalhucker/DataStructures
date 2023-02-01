@@ -1,14 +1,13 @@
 {
   "version": "0.2.0",
   "configurations": [
-  
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/randyhucker/Documents/GitHub/DataStructures-Spring-23/Lab2",
-      "program": "/Users/randyhucker/Documents/GitHub/DataStructures-Spring-23/Lab2/build/Debug/outDebug"
+      "cwd": "/Users/randyhucker/Documents/GitHub/DataStructures-Spring-23/Lab3",
+      "program": "/Users/randyhucker/Documents/GitHub/DataStructures-Spring-23/Lab3/build/Debug/outDebug"
     }
   ]
 }
