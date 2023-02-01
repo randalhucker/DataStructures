@@ -132,13 +132,8 @@ bool Distance::operator==(Distance &D)
     return (this->Meters == D.Meters && this->Inches == D.Inches && this->Feet == D.Inches);
 }
 
-/* string Distance::operator<<(const Distance &D)
+std::ostream &operator<<(ostream &os, Distance &D)
 {
-    return (to_string(this->Meters) + " meters / " + to_string(this->Feet) + " feet " + to_string(this->Inches) + " inches ");
-} */
-
-ostream Distance::operator<<(ostream &os, const Distance &dt)
-{
-    os << to_string(Meters) << " meters / " << to_string(Feet) + " feet " << to_string(Inches) << " inches ";
+    os << to_string(D.getMeters()) << " meters / " << to_string(D.getFeet()) + " feet " << to_string(D.getInches()) << " inches ";
     return os;
 }

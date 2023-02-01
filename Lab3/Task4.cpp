@@ -1,4 +1,3 @@
-// This program produces a sales report for DLC, Inc.
 #include <iostream>
 #include <iomanip>
 #include <stdio.h>
@@ -28,6 +27,7 @@ int main()
     double x2 = 0;
     double y2 = 0;
     int operation = 0;
+    bool equality = true;
 
     cout << "Please enter x: ";
     cin >> x1;
@@ -45,7 +45,6 @@ int main()
     // }
 
     Distance D1 = Distance(x1, y1);
-    D1.print();
     while (ans == 1)
     {
         showOperatorMenu();
@@ -64,6 +63,7 @@ int main()
         //     cout << "Please enter a numerical x: ";
         //     cin >> x2;
         // }
+
         cout << "Please enter y for the second distance: ";
         cin >> y2;
         // while (!isdigit(y2))
@@ -73,21 +73,29 @@ int main()
         // }
 
         Distance D2 = Distance(x1, y1);
-        D2.print();
+
         switch (operation)
         {
         case 0:
             D1 + D2;
+            break;
         case 1:
             D1 - D2;
+            break;
         case 2:
             D1 *D2;
+            break;
         case 3:
             D1 / D2;
+            break;
         case 4:
-            // cout << D1;
+            cout << D1;
+            break;
         case 5:
-            bool equality = (D1 == D2);
+            equality = (D1 == D2);
+            break;
+        default:
+            break;
         }
 
         D1.print();

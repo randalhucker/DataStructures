@@ -40,9 +40,9 @@ public:
     void operator/(Distance &D);
     bool operator==(Distance &D);
 
-    // << overload
-    ostream operator<<(ostream &os, const Distance &dt);
-
     // return distance in meters
     double returnDistance() { return Meters; }
+
+    // << overload
+    friend std::ostream &operator<<(ostream &os, Distance &D);
 };
