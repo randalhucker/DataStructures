@@ -40,7 +40,7 @@ public:
     bool operator==(const Distance &D);
 
     // << overload
-    string operator<<(const Distance &D);
+    ostream& operator<<(ostream& os, const Date& dt);
 
     // return distance in meters
     double returnDistance() {return Meters;}
