@@ -2,6 +2,7 @@
 #include <cmath>
 #include <string>
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -14,7 +15,7 @@ Distance::Distance()
 }
 
 // Fill constructor for imperial units
-Distance::Distance(int f, int i)
+Distance::Distance(double f, double i)
 {
     Feet = f;
     Inches = i;
@@ -22,7 +23,7 @@ Distance::Distance(int f, int i)
     if (i > 12)
     {
         Feet += floor(i / 12);
-        Inches = i % 12;
+        Inches = Inches - (Feet * 12);
     }
     UpdateMetric();
 }
@@ -42,12 +43,12 @@ Distance::~Distance()
 }
 
 // Getters
-int Distance::getInches()
+double Distance::getInches()
 {
     return (Inches);
 }
 
-int Distance::getFeet()
+double Distance::getFeet()
 {
     return (Feet);
 }
@@ -57,18 +58,18 @@ double Distance::getMeters()
 }
 
 // Setters
-void Distance::setInches(int i)
+void Distance::setInches(double i)
 {
     Inches = i;
     if (i > 12)
     {
         Feet += floor(i / 12);
-        Inches = i % 12;
+        Inches = Inches - (Feet * 12);
     }
     UpdateMetric();
 }
 
-void Distance::setFeet(int f)
+void Distance::setFeet(double f)
 {
     Feet = f;
     UpdateMetric();
@@ -86,7 +87,7 @@ void Distance::UpdateImperial() // updates the feet and inches according to the 
 {
     Inches = 39.3701 * Meters;
     Feet = floor(Inches / 12);
-    Inches = Inches % 12;
+    Inches = Inches - (Feet * 12);
 }
 
 void Distance::UpdateMetric() // updates meters according to the current value of feet and inches
@@ -96,9 +97,12 @@ void Distance::UpdateMetric() // updates meters according to the current value o
 
 void Distance::print() // uses cout to disply the values of class attributes
 {
+    cout << fixed << setprecision(2);
+    cout << endl;
     cout << "Meters: " << Meters << endl;
     cout << "Feet: " << Feet << endl;
     cout << "Inches: " << Inches << endl;
+    cout << endl;
 }
 
 // Operator Overloads

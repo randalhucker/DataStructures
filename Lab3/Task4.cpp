@@ -1,9 +1,7 @@
-#include <iostream>
 #include <iomanip>
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <fstream>
 #include "Distance.h"
 
 using namespace std;
@@ -23,28 +21,23 @@ int main()
 {
     int ans = 1;
     double x1 = 0;
-    double y1 = 0;
     double x2 = 0;
-    double y2 = 0;
     int operation = 0;
-    bool equality = true;
 
-    cout << "Please enter x: ";
+    cout << "All calculations are performed according to the value stored for meters." << endl;
+    cout << "Because of this, only an x value is needed for input (instead of x for feet and y for inches)" << endl;
+    cout << "Feet and inch value are adjusted according to the value for meters." << endl;
+    cout << endl;
+    cout << "Please enter x for the first distance (in meters): ";
     cin >> x1;
+    cout << endl;
     // while (!isdigit(x1))
     // {
     //     cout << "Please enter a numerical x: ";
     //     cin >> x1;
     // }
-    cout << "Please enter y: ";
-    cin >> y1;
-    // while (!isdigit(y1))
-    // {
-    //     cout << "Please enter a numerical y: ";
-    //     cin >> y1;
-    // }
 
-    Distance D1 = Distance(x1, y1);
+    Distance D1 = Distance(x1);
     while (ans == 1)
     {
         showOperatorMenu();
@@ -56,23 +49,20 @@ int main()
             cin >> operation;
         }
 
-        cout << "Please enter x for the second distance: ";
-        cin >> x2;
-        // while (!isdigit(x2))
-        // {
-        //     cout << "Please enter a numerical x: ";
-        //     cin >> x2;
-        // }
+        Distance D2 = Distance();
 
-        cout << "Please enter y for the second distance: ";
-        cin >> y2;
-        // while (!isdigit(y2))
-        // {
-        //     cout << "Please enter a numerical y: ";
-        //     cin >> y2;
-        // }
-
-        Distance D2 = Distance(x1, y1);
+        if (operation != 4)
+        {
+            cout << "Please enter x for the second distance (in meters): ";
+            cin >> x2;
+            cout << endl;
+            // while (!isdigit(x2))
+            // {
+            //     cout << "Please enter a numerical x: ";
+            //     cin >> x2;
+            // }
+            D2.setMeters(x2);
+        }
 
         switch (operation)
         {
@@ -83,7 +73,7 @@ int main()
             D1 - D2;
             break;
         case 2:
-            D1 *D2;
+            D1 * D2;
             break;
         case 3:
             D1 / D2;
@@ -92,9 +82,8 @@ int main()
             cout << D1;
             break;
         case 5:
-            equality = (D1 == D2);
-            break;
-        default:
+            bool equality = (D1 == D2);
+            cout << equality;
             break;
         }
 
