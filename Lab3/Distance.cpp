@@ -133,7 +133,7 @@ void Distance::operator/(Distance &D)
 
 bool Distance::operator==(Distance &D)
 {
-    return (this->Meters == D.Meters && this->Inches == D.Inches && this->Feet == D.Inches);
+    return (this->Meters == D.Meters || (this->Inches == D.Inches && this->Feet == D.Inches));
 }
 
 std::ostream &operator<<(ostream &os, Distance &D)

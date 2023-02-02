@@ -11,10 +11,10 @@ private:
 
 public:
     // Constructors / destructor
-    Distance();             // Default Constructor
+    Distance();                   // Default Constructor
     Distance(double f, double i); // Fill constructor for imperial units
-    Distance(double m);     // Fill constructor for metric units
-    ~Distance();            // Destructor
+    Distance(double m);           // Fill constructor for metric units
+    ~Distance();                  // Destructor
 
     // Getters
     double getFeet();

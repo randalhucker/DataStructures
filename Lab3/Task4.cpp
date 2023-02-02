@@ -73,7 +73,7 @@ int main()
             D1 - D2;
             break;
         case 2:
-            D1 * D2;
+            D1 *D2;
             break;
         case 3:
             D1 / D2;
@@ -82,8 +82,8 @@ int main()
             cout << D1;
             break;
         case 5:
-            bool equality = (D1 == D2);
-            cout << equality;
+            string s = (D1 == D2) ? "True" : "False";
+            cout << s << endl;
             break;
         }
 
