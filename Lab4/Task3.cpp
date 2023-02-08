@@ -17,12 +17,12 @@ void showOperatorMenu()
     cout << "Press 5 for an instance of a TV Show declared as a Show." << endl;
 }
 
-void TheMegaPrint(Show s)
+void TheMegaPrint(Show* s)
 {
     cout << "Details: " << endl;
-    s.Details();
+    s->Details();
     cout << "Play: " << endl;
-    s.Play();
+    s->Play();
 }
 
 int main()
@@ -40,10 +40,8 @@ int main()
             string Description;
             cout << "Please enter the Show's Title: ";
             cin >> Title;
-            cout << endl;
             cout << "Please enter the Show's Description: ";
             cin >> Description;
-            cout << endl;
 
             Show instance = Show(Title, Description);
         }
@@ -54,13 +52,10 @@ int main()
             string Credits;
             cout << "Please enter the Movie's Title: ";
             cin >> Title;
-            cout << endl;
             cout << "Please enter the Movie's Description: ";
             cin >> Description;
-            cout << endl;
             cout << "Please enter the Movie's Credits: ";
             cin >> Credits;
-            cout << endl;
 
             Movie instance = Movie(Title, Description, Credits);
         }
@@ -72,15 +67,12 @@ int main()
             int Episodes;
             cout << "Please enter the TvShow's Title: ";
             cin >> Title;
-            cout << endl;
             cout << "Please enter the TvShow's Description: ";
             cin >> Description;
-            cout << endl;
             cout << "Please enter the number of Seasons: ";
             cin >> Seasons;
             cout << "Please enter the number of Episodes in each season: ";
             cin >> Episodes;
-            cout << endl;
 
             TvShow instance = TvShow(Title, Description, Seasons, Episodes);
         }
@@ -91,13 +83,10 @@ int main()
             string Credits;
             cout << "Please enter the Movie's Title: ";
             cin >> Title;
-            cout << endl;
             cout << "Please enter the Movie's Description: ";
             cin >> Description;
-            cout << endl;
             cout << "Please enter the Movie's Credits: ";
             cin >> Credits;
-            cout << endl;
 
             Show *instance = new Movie(Title, Description, Credits);
         }
@@ -109,20 +98,17 @@ int main()
             int Episodes;
             cout << "Please enter the TvShow's Title: ";
             cin >> Title;
-            cout << endl;
             cout << "Please enter the TvShow's Description: ";
             cin >> Description;
-            cout << endl;
             cout << "Please enter the number of Seasons: ";
             cin >> Seasons;
             cout << "Please enter the number of Episodes in each season: ";
             cin >> Episodes;
-            cout << endl;
 
             Show *instance = new TvShow(Title, Description, Seasons, Episodes);
         }
 
-        cout << "Would you like to continue testing? Enter '1' for yes, anything else for no";
+        cout << "Would you like to continue testing? Enter '1' for yes, anything else for No: ";
         cin >> ans;
     }
 

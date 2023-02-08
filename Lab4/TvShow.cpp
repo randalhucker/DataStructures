@@ -28,10 +28,14 @@ TvShow::TvShow(string T, string D, int s, int e)
     }
 }
 
+TvShow::~TvShow()
+{
+}
+
 // new Getter
 string TvShow::getEpisode(int s, int e)
 {
-    return Episodes[s-1][e-1];
+    return Episodes[s - 1][e - 1];
 }
 
 // new Setter (passes in nuumber of seasons, and number of episodes (came number of episodes in all seasons))
@@ -59,7 +63,7 @@ void TvShow::Play()
     cout << "Now Playing: " + Episodes[s - 1][e - 1] << endl;
 }
 
-void TvShow::Details() //How can overide?
+void TvShow::Details() // How can overide?
 {
     cout << fixed << setprecision(2);
     cout << endl;
