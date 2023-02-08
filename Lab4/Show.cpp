@@ -56,3 +56,11 @@ void Show::Details() // uses cout to disply the values of class attributes
     cout << "Description: " << getDescription() << endl;
     cout << endl;
 }
+
+void Show::Play()
+{
+    cout << fixed << setprecision(2);
+    cout << endl;
+    cout << "Show Had No Play" << endl;
+    cout << endl;
+}
