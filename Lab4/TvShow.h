@@ -1,3 +1,4 @@
+#pragma once
 #include "Show.h"
 #include <string>
 #include <iostream>
@@ -21,4 +22,5 @@ public:
 
     void Play();
     void Details();
+    void InitializeArray(); // initializes episode array to "0"
 };

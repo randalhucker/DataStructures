@@ -1,3 +1,4 @@
+
 #include "TvShow.h"
 #include <string>
 #include <iostream>
@@ -10,7 +11,7 @@ TvShow::TvShow()
 {
     Title = "";
     Description = "";
-    memset(Episodes, '0', 10 * sizeof(string));
+    InitializeArray();
 }
 
 // Fill constructor
@@ -18,7 +19,7 @@ TvShow::TvShow(string T, string D, int s, int e)
 {
     Title = T;
     Description = D;
-    memset(Episodes, '0', 10 * sizeof(string));
+    InitializeArray();
     for (int i = 0; i < s; i++)
     {
         for (int j = 0; j < e; j++)
@@ -41,12 +42,12 @@ string TvShow::getEpisode(int s, int e)
 // new Setter (passes in nuumber of seasons, and number of episodes (came number of episodes in all seasons))
 void TvShow::setEpisodes(int s, int e)
 {
-    memset(Episodes, '0', 10 * sizeof(string));
+    InitializeArray();
     for (int i = 0; i < s; i++)
     {
         for (int j = 0; j < e; j++)
         {
-            Episodes[i][j] = "Season: " + to_string(i) + " Episode: " + to_string(j);
+            Episodes[i][j] = "Season: " + to_string(i + 1) + " Episode: " + to_string(j + 1);
         }
     }
 }
@@ -60,7 +61,7 @@ void TvShow::Play()
     cout << "Please enter the Episode you'd like to play: ";
     cin >> e;
     cout << endl;
-    cout << "Now Playing: " + Episodes[s - 1][e - 1] << endl;
+    cout << "Now Playing: " + Episodes[s - 1][e - 1] << " of " + Title << endl;
 }
 
 void TvShow::Details() // How can overide?
@@ -80,4 +81,15 @@ void TvShow::Details() // How can overide?
     }
     cout << "Number of Seasons: " << counter << endl;
     cout << endl;
+}
+
+void TvShow::InitializeArray()
+{
+    for (int i = 0; i < 100; i++)
+    {
+        for (int j = 0; j < 100; j++)
+        {
+            Episodes[i][j] = "0";
+        }
+    }
 }

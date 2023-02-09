@@ -1,3 +1,4 @@
+
 #include "Movie.h"
 #include <cmath>
 #include <string>
@@ -45,7 +46,8 @@ void Movie::setCredits(string C)
 void Movie::Play() // uses cout to disply the values of class attributes
 {
     cout << fixed << setprecision(2);
+    cout << "Now Playing: " + getTitle();
     cout << endl;
-    cout << "Credits: " << getCredits() << endl;
+    cout << "Credits: " << getCredits();
     cout << endl;
 }

@@ -1,4 +1,4 @@
-#pragma once
+
 #include <string>
 #include "Product.h"
 
@@ -25,7 +25,6 @@ Product::Product(int id, int u, double p, string d, bool t)
 
 Product::~Product()
 {
-
 }
 
 // Setters
@@ -65,5 +64,5 @@ double Product::getSales() { return Sales; }
 // Other member functions
 double Product::calcSales()
 {
-    return(Units * Price);
+    return (Units * Price);
 }

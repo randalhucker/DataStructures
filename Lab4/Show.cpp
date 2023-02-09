@@ -47,20 +47,15 @@ void Show::setDescription(string D)
     Description = D;
 }
 
+void Show::Play()
+{
+    cout << "Now Playing: " + Title << endl;
+}
+
 // Details
 void Show::Details() // uses cout to disply the values of class attributes
 {
     cout << fixed << setprecision(2);
-    cout << endl;
     cout << "Title: " << getTitle() << endl;
     cout << "Description: " << getDescription() << endl;
-    cout << endl;
-}
-
-void Show::Play()
-{
-    cout << fixed << setprecision(2);
-    cout << endl;
-    cout << "Show Had No Play" << endl;
-    cout << endl;
 }

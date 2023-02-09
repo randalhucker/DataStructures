@@ -1,5 +1,4 @@
 // This program produces a sales report for DLC, Inc.
-#pragma once
 
 #include <iostream>
 #include <iomanip>
@@ -19,7 +18,7 @@ int main()
     string Filename; // Name of the file
     ifstream ProductFile;
     string line = "";
-    //string line = "";
+    // string line = "";
     int count = 0;
     int ans = 1;
     int TotalProducts = 0;
@@ -61,8 +60,6 @@ int main()
         }
     }
 
-    
-
     // close file and open it again to reset the curser at the beginning of the file (seekg doesn't work for this particular use)
     ProductFile.close();
     ProductFile.open(Filename);
@@ -75,7 +72,7 @@ int main()
         ProductFile >> line;
         ProductFile >> line;
         ProductArray[i].setID(stoi(line));
-        
+
         getline(ProductFile, line, ' ');
         getline(ProductFile, line);
         ProductArray[i].setUnits(stoi(line));
@@ -83,14 +80,14 @@ int main()
         getline(ProductFile, line, ' ');
         getline(ProductFile, line);
         ProductArray[i].setPrice(stod(line));
-     
+
         getline(ProductFile, line, ' ');
         getline(ProductFile, line);
         ProductArray[i].setDescription(line);
 
         getline(ProductFile, line, ' ');
         getline(ProductFile, line);
- 
+
         if (line == "False")
         {
             ProductArray[i].setTaxExempt(false);
@@ -118,7 +115,7 @@ int main()
     // Display total units sold and total sales.
     showTotals(ProductArray, TotalProducts);
 
-    delete [] ProductArray;
+    delete[] ProductArray;
 
     ProductFile.close();
 

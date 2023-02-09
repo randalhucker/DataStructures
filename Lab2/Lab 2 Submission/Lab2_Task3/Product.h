@@ -1,4 +1,4 @@
-#pragma once
+
 #include <string>
 using namespace std;
 
@@ -14,12 +14,12 @@ private:
     double calcSales(); // private member to calculate sales, used in setSales()
 
 public:
-    //Constructors / destructor
+    // Constructors / destructor
     Product(int id, int u, double p, string d, bool t);
     Product();
     ~Product();
 
-    //Getters
+    // Getters
     int getID();
     int getUnits();
     double getPrice();
@@ -27,12 +27,11 @@ public:
     bool getTaxExempt();
     double getSales();
 
-    //Setters
+    // Setters
     void setID(int id);
     void setUnits(int u);
     void setPrice(double p);
     void setDescription(string d);
     void setTaxExempt(bool t);
     void setSales(); // does not allow programmer to pass in sales because it depends on price and units (setSales() calls calcSales())
-
 };

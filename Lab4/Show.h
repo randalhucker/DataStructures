@@ -1,6 +1,4 @@
-#ifndef SHOW_H
-#define SHOW_H
-
+#pragma once
 #include <string>
 #include <iostream>
 using namespace std;
@@ -31,5 +29,3 @@ public:
     // Detail Function
     void Details();
 };
-
-#endif
