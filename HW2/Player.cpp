@@ -40,6 +40,11 @@ int Player::getTotal()
     return (Total);
 }
 
+Wheel Player::getWheel()
+{
+    return(pWheel);
+}
+
 // Setters
 void Player::setTotal(int T)
 {

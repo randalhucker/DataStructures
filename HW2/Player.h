@@ -8,10 +8,10 @@ using namespace std;
 
 class Player
 {
-private:
-    Wheel pWheel;
+protected:
     int Total;
     string Name;
+    Wheel pWheel;
 
 public:
     Player();                         // Default Constructor
@@ -22,6 +22,7 @@ public:
     int getLastSpin();
     int getTotal();
     string getName();
+    Wheel getWheel();
 
     // Setters
     void setTotal(int M);
