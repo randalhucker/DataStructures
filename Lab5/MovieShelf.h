@@ -2,6 +2,8 @@
 #include <string>
 #include <iostream>
 #include "Movie.h"
+#include "EmptyShelfException.h"
+#include "FullShelfException.h"
 using namespace std;
 
 const int NUM_MOVIES = 10;

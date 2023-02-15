@@ -23,27 +23,29 @@ int MovieShelf::getMovieCount()
     return MovieCount;
 }
 
-Movie* MovieShelf::getMovie(int index)
+Movie *MovieShelf::getMovie(int index)
 {
     return Movies[index];
 }
 
 // Setters
-void MovieShelf::setMovie(Movie* m, int index)
+void MovieShelf::setMovie(Movie *m, int index)
 {
     Movies[index] = m;
 }
 
 // Additional Functions
-void MovieShelf::addMovie(Movie* M)
+void MovieShelf::addMovie(Movie *M)
 {
-    Movies[MovieCount] = M;
+    Movies[MovieCount] = M; // 
+    throw FullShelfException();
     MovieCount++;
 }
 
-Movie* MovieShelf::removeMovie()
+Movie *MovieShelf::removeMovie()
 {
     MovieCount--;
-    Movie* returnMovie = Movies[MovieCount];
+    Movie *returnMovie = Movies[MovieCount];
+    throw EmptyShelfException();
     return returnMovie;
 }

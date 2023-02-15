@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "MovieShelf.h"
-#include "EmptyShelfException.h"
-#include "FullShelfException.h"
 
 using namespace std;
 
@@ -40,26 +38,31 @@ int main()
             getline(cin, Description);
             cout << endl;
 
-            // try {
-            //     Shelf->addMovie(new Movie(Title, Description));
-            // }            // dynamically create instance
-            // catch{
-            //     x=0
-            // }
+            try
+            {
+                Shelf->addMovie(new Movie(Title, Description)); // dynamically create instance
+                throw FullShelfException();
+            }
+            catch (FullShelfException fse)
+            {
+                cout << "Caught FullShelfException" << endl;
+                cout << fse.what();
+                cout << endl;
+            }
         }
         else if (MenuAns == 2) // remove movie
         {
-            // TODO ADD EMPTY SHELF EXCEPTION
             try
             {
                 Movie *RemovedMovie = Shelf->removeMovie();
                 cout << "You're now holding: " << endl;
                 RemovedMovie->Details();
             }
-            catch (EmptyShelfException mce)
+            catch (EmptyShelfException ese)
             {
                 cout << "Caught EmptyShelfException" << endl;
-                cout << mce.what();
+                cout << ese.what();
+                cout << endl;
             }
         }
         else if (MenuAns == 3) // show movie count
