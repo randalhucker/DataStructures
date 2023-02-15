@@ -11,13 +11,13 @@ using namespace std;
 // Default constructor
 Player::Player()
 {
-    pWheel = Wheel();
+    pWheel = new Wheel();
     Total = 0;
     Name = "";
 }
 
 // Fill constructor
-Player::Player(Wheel pW, int T, string N)
+Player::Player(Wheel* pW, int T, string N)
 {
     pWheel = pW;
     Total = T;
@@ -32,7 +32,7 @@ Player::~Player()
 // Getters
 int Player::getLastSpin()
 {
-    return (pWheel.getBallValue());
+    return (pWheel->getBallValue());
 }
 
 int Player::getTotal()
@@ -40,7 +40,7 @@ int Player::getTotal()
     return (Total);
 }
 
-Wheel Player::getWheel()
+Wheel* Player::getWheel()
 {
     return(pWheel);
 }

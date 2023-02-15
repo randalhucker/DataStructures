@@ -26,17 +26,18 @@ HardWheel::~HardWheel()
 {
 }
 
-void HardWheel::Spin(int val)
+void HardWheel::Spin(int val, int max)
 {
-    Wheel::Spin();
-    if (val > BallValue)
+    srand(time(NULL));
+    BallValue = (rand() % Max + Min);
+    if (BallValue < val)
     {
         Max++;
     }
     else
     {
         WinCount++;
-        if (WinCount > 1)
+        if (WinCount > 1 && Max > max)
         {
             Max--;
         }
@@ -44,13 +45,13 @@ void HardWheel::Spin(int val)
 }
 
 // Getter
-int getWinCount()
+int HardWheel::getWinCount()
 {
     return (WinCount);
 }
 
-//Setter
-void setWinCount(int w)
+// Setter
+void HardWheel::setWinCount(int w)
 {
     WinCount = w;
 }

@@ -28,5 +28,5 @@ public:
     void setBallValue(int B);
 
     // Other Functions
-    void Spin();
+    virtual void Spin(int val, int max);
 };

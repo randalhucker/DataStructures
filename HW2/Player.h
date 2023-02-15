@@ -1,4 +1,4 @@
-// #pragma once
+#pragma once
 #include <string>
 #include <cstdlib>
 #include "Wheel.h"
@@ -11,18 +11,18 @@ class Player
 protected:
     int Total;
     string Name;
-    Wheel pWheel;
+    Wheel* pWheel;
 
 public:
     Player();                         // Default Constructor
-    Player(Wheel w, int T, string N); // Fill constructor
+    Player(Wheel* w, int T, string N); // Fill constructor
     ~Player();                        // Destructor
 
     // Getters
     int getLastSpin();
     int getTotal();
     string getName();
-    Wheel getWheel();
+    Wheel* getWheel();
 
     // Setters
     void setTotal(int M);

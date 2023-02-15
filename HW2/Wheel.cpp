@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include <time.h>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ Wheel::Wheel()
 
 // Fill constructor
 Wheel::Wheel(int minimum, int maximum)
-{   
+{
     Max = maximum;
     Min = minimum;
     BallValue = 0;
@@ -27,7 +28,6 @@ Wheel::Wheel(int minimum, int maximum)
 // Destructor
 Wheel::~Wheel()
 {
-
 }
 
 // Getters
@@ -62,8 +62,8 @@ void Wheel::setBallValue(int B)
     BallValue = B;
 }
 
-void Wheel::Spin()
+void Wheel::Spin(int val, int max)
 {
-    setBallValue(rand() % Max + Min);
+    srand(time(NULL));
+    BallValue = (rand() % Max + Min);
 }
-
