@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/randyhucker/Documents/GitHub/DataStructures-Spring-23/HW2",
-      "program": "/Users/randyhucker/Documents/GitHub/DataStructures-Spring-23/HW2/build/Debug/outDebug"
+      "cwd": "/Users/randyhucker/Documents/GitHub/DataStructures-Spring-23/Lab5",
+      "program": "/Users/randyhucker/Documents/GitHub/DataStructures-Spring-23/Lab5/build/Debug/outDebug"
     }
   ]
 }
