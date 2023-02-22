@@ -151,9 +151,11 @@ int main()
             }
             AnswerString.append(" ");
         }
+
         cout << "Reversed String: " << endl
              << AnswerString << endl
              << endl;
+             
         cout << "Would you like to continue?" << endl;
         cout << "Enter 0 for File / Enter 1 for Terminal (Anything else to quit): " << endl;
         cout << "> ";
