@@ -28,7 +28,7 @@ void Stack<T>::Push(T *inval)
     }
     else
     {
-       throw StackOverflowException();
+        throw StackOverflowException();
     }
 }
 
@@ -42,7 +42,7 @@ T *Stack<T>::Pop()
     }
     else
     {
-        throw StackUnderFlowException();
+        throw StackUnderflowException();
     }
 }
 
@@ -53,7 +53,7 @@ T *Stack<T>::Top()
     {
         return StackArray[top - 1];
     }
-    throw StackUnderFlowException();
+    throw StackUnderflowException();
 }
 
 template <class T>
@@ -65,7 +65,7 @@ int Stack<T>::Length()
 template <class T>
 void Stack<T>::Empty()
 {
-    for (int i = 0; i < Size; i++)
+    for (int i = 0; i < top; i++)
     {
         delete StackArray[i];
     }

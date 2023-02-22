@@ -8,10 +8,6 @@
 
 using namespace std;
 
-void run_main()
-{
-}
-
 int main()
 {
     int numWords = 0;
@@ -140,14 +136,41 @@ int main()
         string *CurrentWord;
         while (WordQueue.Length() > 0)
         {
-            CurrentWord = WordQueue.Dequeue();
+            try
+            {
+                CurrentWord = WordQueue.Dequeue();
+            }
+            catch (QueueUnderflowException que)
+            {
+                cout << "Caught QueueUnderflowException" << endl;
+                cout << que.what();
+                cout << endl;
+            }
             for (int i = 0; i < (*CurrentWord).length(); i++)
             {
-                LetterStack.Push(new char((*CurrentWord).at(i)));
+                try
+                {
+                    LetterStack.Push(new char((*CurrentWord).at(i)));
+                }
+                catch (StackOverflowException soe)
+                {
+                    cout << "Caught StackOverflowException" << endl;
+                    cout << soe.what();
+                    cout << endl;
+                }
             }
             for (int j = 0; j < (*CurrentWord).length(); j++)
             {
-                AnswerString.append((LetterStack.Pop()));
+                try
+                {
+                    AnswerString.append((LetterStack.Pop()));
+                }
+                catch (StackUnderflowException sue)
+                {
+                    cout << "Caught StackUnderflowException" << endl;
+                    cout << sue.what();
+                    cout << endl;
+                }
             }
             AnswerString.append(" ");
         }
@@ -155,11 +178,16 @@ int main()
         cout << "Reversed String: " << endl
              << AnswerString << endl
              << endl;
-             
+
         cout << "Would you like to continue?" << endl;
         cout << "Enter 0 for File / Enter 1 for Terminal (Anything else to quit): " << endl;
         cout << "> ";
         cin >> InputChoice;
         cout << endl;
+        if (InputChoice != 0 && InputChoice != 1)
+        {
+            WordQueue.Empty();
+            LetterStack.Empty();
+        }
     }
 }

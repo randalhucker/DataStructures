@@ -12,7 +12,7 @@ public:
     }
 };
 
-class StackUnderFlowException : public std::exception
+class StackUnderflowException : public std::exception
 {
 public:
     string what() // overrides what() virtual function from exception that returns an explanatory string

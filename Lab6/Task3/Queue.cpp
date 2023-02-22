@@ -68,7 +68,7 @@ int Queue<T>::Length()
 template <class T>
 void Queue<T>::Empty()
 {
-    for (int i = 0; i < Size; i++)
+    for (int i = 0; i < NumItems; i++)
     {
         delete QueueArray[i];
     }
