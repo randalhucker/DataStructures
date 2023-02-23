@@ -92,6 +92,7 @@ int main()
             targetFile.open(FileName);
             while (!targetFile.eof())
             {
+                word = "";
                 targetFile >> word;
                 WordQueue.Enqueue(new string(word));
             }
@@ -119,17 +120,6 @@ int main()
             WordQueue.Enqueue(new string(word)); // add final word
         }
 
-        // try
-        // {
-        //     WordQueue.Enqueue(new string("this"));
-        //     WordQueue.Enqueue(new string("is"));
-        //     WordQueue.Enqueue(new string("a"));
-        //     WordQueue.Enqueue(new string("test"));
-        // }
-        // catch (QueueOverflowException e)
-        // {
-        //     cout << e.what();
-        // }
         // Begin letter reversal section
         Stack<char> LetterStack = Stack<char>(50); // stack size of 50 is long enough to hold longest word in english language
         string AnswerString = "";

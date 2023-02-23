@@ -1,4 +1,5 @@
-test test test test test test test test test test test test test test test test these are random words blah blah blah
-test test test test test test test test test test test test test test test test these are random words blah blah blah
-test test test test test test test test test test test test test test test test these are random words blah blah blah
-test test test test test test test test test test test test test test test test these are random words blah blah blah
+This is the first line
+This is the second line with a period.
+this line wasn't captialized
+
+hello!
