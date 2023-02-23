@@ -136,11 +136,13 @@ int main()
                 cout << que.what();
                 cout << endl;
             }
+            char *char_array = new char[(*CurrentWord).length() + 1];
+            strcpy(char_array, (*CurrentWord).c_str());
             for (int i = 0; i < (*CurrentWord).length(); i++)
             {
                 try
                 {
-                    LetterStack.Push(new char((*CurrentWord).at(i)));
+                    LetterStack.Push(new char(char_array[i]));
                 }
                 catch (StackOverflowException soe)
                 {
