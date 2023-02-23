@@ -1,3 +1,4 @@
+#pragma once
 #include "Stack.cpp"
 #include "Queue.cpp"
 #include <iostream>
@@ -12,7 +13,7 @@ int main()
 {
     int numWords = 0;
     const int maxChars = 50;
-    int InputChoice = 0;
+    char InputChoice = '0';
     string textline;
     string FileName;
 
@@ -21,9 +22,9 @@ int main()
     cin >> InputChoice;
     cout << endl;
 
-    while (InputChoice == 0 || InputChoice == 1)
+    while (InputChoice == '0' || InputChoice == '1')
     {
-        if (InputChoice == 0)
+        if (InputChoice == '0')
         {
             char c;
             string word;
@@ -84,7 +85,7 @@ int main()
         Queue<string> WordQueue = Queue<string>(numWords);
         // now put words into queue
 
-        if (InputChoice == 0)
+        if (InputChoice == '0')
         {
             string word = "";
             string line;
@@ -123,7 +124,7 @@ int main()
         // Begin letter reversal section
         Stack<char> LetterStack = Stack<char>(50); // stack size of 50 is long enough to hold longest word in english language
         string AnswerString = "";
-        string *CurrentWord;
+        string *CurrentWord = new string("");
         while (WordQueue.Length() > 0)
         {
             try
@@ -136,13 +137,14 @@ int main()
                 cout << que.what();
                 cout << endl;
             }
-            char *char_array = new char[(*CurrentWord).length() + 1];
-            strcpy(char_array, (*CurrentWord).c_str());
+
             for (int i = 0; i < (*CurrentWord).length(); i++)
             {
                 try
                 {
-                    LetterStack.Push(new char(char_array[i]));
+                    char *cp = new char((*CurrentWord)[i]);
+                    cp[1] = '\0'; // add null terminator to ensure only 1 character is pushed
+                    LetterStack.Push(cp);
                 }
                 catch (StackOverflowException soe)
                 {
@@ -151,6 +153,7 @@ int main()
                     cout << endl;
                 }
             }
+
             for (int j = 0; j < (*CurrentWord).length(); j++)
             {
                 try
@@ -166,20 +169,19 @@ int main()
             }
             AnswerString.append(" ");
         }
-
         cout << "Reversed String: " << endl
              << AnswerString << endl
              << endl;
 
         cout << "Would you like to continue?" << endl;
-        cout << "Enter 0 for File / Enter 1 for Terminal (Anything else to quit): " << endl;
-        cout << "> ";
+        cout << "Enter 0 for File / Enter 1 for Terminal (Anything else to quit): ";
         cin >> InputChoice;
         cout << endl;
-        if (InputChoice != 0 && InputChoice != 1)
+        if (InputChoice != '0' && InputChoice != '1')
         {
             WordQueue.Empty();
             LetterStack.Empty();
         }
     }
+    return 0;
 }
