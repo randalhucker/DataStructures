@@ -4,7 +4,7 @@ using namespace std;
 template <class T>
 class OrderedList
 {
-private:
+protected:
     T **PointerArray;
     int Size;
     int numItems;

@@ -58,6 +58,10 @@ void OrderedList<T>::addItem(T inval)
 template <class T>
 T OrderedList<T>::removeItem(T n)
 {
+    if (isEmpty())
+    {
+        throw EmptyListException();
+    }
     int index = FindItem(n);
     T retval = (PointerArray[index] *);
     for (int i = index; i < numItems; i++) // loop to shift other items right
