@@ -55,7 +55,7 @@ void OrderedList<T>::addItem(T inval)
     }
     for (int j = numItems; j > i; j--) // loop to shift other items right
     {
-        PointerArray[j] = PointerArray[j - 1];
+        PointerArray[j] = PointerArray[j-1];
     }
     PointerArray[i] = new T(inval);
     numItems++;
@@ -103,7 +103,7 @@ int OrderedList<T>::FindItem(T val)
     {
         if ((*PointerArray[i]) == val)
         {
-            return (*PointerArray[i]);
+            return (i);
         }
     }
     throw ItemNotFoundException();

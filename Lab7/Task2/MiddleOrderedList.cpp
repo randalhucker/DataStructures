@@ -163,7 +163,7 @@ void MiddleOrderedList<T>::MakeEmpty()
 }
 
 template <class T>
-int MiddleOrderedList<T>::FindItem(T val)
+int MiddleOrderedList<T>::FindItem(T val) // returns index of the value passed in if it exists in the list (if not throws item not found exception
 {
     if (val > (*PointerArray[MiddleIndex]))
     {
@@ -171,7 +171,7 @@ int MiddleOrderedList<T>::FindItem(T val)
         {
             if ((*PointerArray[i]) == val)
             {
-                return (*PointerArray[i]);
+                return (i);
             }
         }
     }
@@ -181,7 +181,7 @@ int MiddleOrderedList<T>::FindItem(T val)
         {
             if ((*PointerArray[i]) == val)
             {
-                return (*PointerArray[i]);
+                return (i);
             }
         }
     }

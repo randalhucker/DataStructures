@@ -27,6 +27,7 @@ public:
     bool isFull();
     virtual void MakeEmpty();
     virtual string Print();
+
 };
 
 #endif
