@@ -26,38 +26,38 @@ int main()
         rVector.push_back((rand() % 100) + 1);
     }
 
-    while (!rVector.empty())
-    {
-        if (!eVector.empty())
-        {
-            if (((rand() % 1) + 1))
-            { // Add Item Case
-                int numCheck = (rand() % rVector.size()) + 1;
-                OList.addItem(rVector[numCheck]);
-                MList.addItem(rVector[numCheck]);
-                SList.addItem(rVector[numCheck]);
-                eVector.push_back(rVector[numCheck])
-                    rVector.erase(numCheck);
-            }
-            else // Remove Item Case
-            {
-                int numCheck = (rand() % eVector.size()) + 1;
-                OList.removeItem(eVector[numCheck]);
-                MList.removeItem(eVector[numCheck]);
-                SList.removeItem(eVector[numCheck]);
-                eVector.erase(numCheck);
-            }
-        }
-        else
-        {
-            int numCheck = (rand() % rVector.size()) + 1;
-            OList.addItem(rVector[numCheck]);
-            MList.addItem(rVector[numCheck]);
-            SList.addItem(rVector[numCheck]);
-            eVector.push_back(rVector[numCheck])
-                rVector.erase(numCheck);
-        }
-    }
+    // while (!rVector.empty())
+    // {
+    //     if (!eVector.empty())
+    //     {
+    //         if (((rand() % 1) + 1))
+    //         { // Add Item Case
+    //             int numCheck = (rand() % rVector.size()) + 1;
+    //             OList.addItem(rVector[numCheck]);
+    //             MList.addItem(rVector[numCheck]);
+    //             SList.addItem(rVector[numCheck]);
+    //             eVector.push_back(rVector[numCheck]);
+    //             rVector.erase(numCheck);
+    //         }
+    //         else // Remove Item Case
+    //         {
+    //             int numCheck = (rand() % eVector.size()) + 1;
+    //             OList.removeItem(eVector[numCheck]);
+    //             MList.removeItem(eVector[numCheck]);
+    //             SList.removeItem(eVector[numCheck]);
+    //             eVector.erase(numCheck);
+    //         }
+    //     }
+    //     else
+    //     {
+    //         int numCheck = (rand() % rVector.size()) + 1;
+    //         OList.addItem(rVector[numCheck]);
+    //         MList.addItem(rVector[numCheck]);
+    //         SList.addItem(rVector[numCheck]);
+    //         eVector.push_back(rVector[numCheck]);
+    //         rVector.erase(numCheck);
+    //     }
+    // }
 
     int number = 1;
     int ans = 1;
