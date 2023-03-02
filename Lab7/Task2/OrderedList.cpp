@@ -13,6 +13,10 @@ OrderedList<T>::OrderedList()
     PointerArray = new T *[ARRAY_SIZE];
     Size = ARRAY_SIZE;
     numItems = 0;
+    for (int i = 0; i < Size; i++)
+    {
+        PointerArray[i] = nullptr;
+    }
 }
 
 template <class T>
@@ -44,7 +48,7 @@ void OrderedList<T>::addItem(T inval)
     int i;                         // counter to hold place where we want to insert inval
     for (i = 0; i < numItems; i++) // loop to find place to insert
     {
-        if ((*PointerArray[i]) < inval)
+        if ((*PointerArray[i]) > inval)
         {
             break;
         }
@@ -54,6 +58,7 @@ void OrderedList<T>::addItem(T inval)
         PointerArray[j] = PointerArray[j - 1];
     }
     PointerArray[i] = new T(inval);
+    numItems++;
 }
 
 template <class T>
