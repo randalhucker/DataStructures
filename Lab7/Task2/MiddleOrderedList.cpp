@@ -37,10 +37,11 @@ void MiddleOrderedList<T>::addItem(T inval)
     if (inval < (*PointerArray[MiddleIndex]))
     {
         // find desired index
-        while ((PointerArray[current] != nullptr && inval < (*PointerArray[current])) || current == 0)
+        while ((PointerArray[current] != nullptr && inval < (*PointerArray[current])) && current != 0)
         {
             current--;
         }
+        cout << current << endl;
         if (PointerArray[current] == nullptr) // nullptr case
         {
             cout << "This should run" << endl;
