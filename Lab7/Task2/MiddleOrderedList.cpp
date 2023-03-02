@@ -4,12 +4,10 @@
 
 using namespace std;
 
-const int ARRAY_SIZE = 25;
-
 template <class T>
 MiddleOrderedList<T>::MiddleOrderedList()
 {
-    PointerArray = new T *[ARRAY_SIZE];
+    PointerArray = new T *[ARRAY_SIZE - 1];
     Size = ARRAY_SIZE;
     MiddleIndex = (ARRAY_SIZE / 2);
     RightIndex = (MiddleIndex + 1);
@@ -39,34 +37,36 @@ void MiddleOrderedList<T>::addItem(T inval)
     if (inval < (*PointerArray[MiddleIndex]))
     {
         // find desired index
-        while (PointerArray[current] != nullptr || inval < (*PointerArray[current]) || current == 0)
+        while ((PointerArray[current] != nullptr && inval < (*PointerArray[current])) || current == 0)
         {
             current--;
         }
-
         if (PointerArray[current] == nullptr) // nullptr case
         {
+            cout << "This should run" << endl;
             PointerArray[current] = new T(inval);
             numItems++;
             LeftIndex--;
         }
         else if (current == 0 || LeftIndex == -1) // right shift case (no room on left)
         {
-            for (int i = current; i < RightIndex; i++)
+            cout << "Wrong ran" << endl;
+            for (int i = RightIndex; i > current; i--)
             {
-                PointerArray[i + 1] = PointerArray[i];
+                PointerArray[i] = PointerArray[i - 1];
             }
-            PointerArray[current] == new T(inval);
+            PointerArray[current] = new T(inval);
             numItems++;
             RightIndex++;
         }
         else // left shift case (room on left to shift)
         {
+            cout << "also wrong ran" << endl;
             for (int i = LeftIndex; i < current; i++)
             {
                 PointerArray[i] = PointerArray[i + 1];
             }
-            PointerArray[current] == new T(inval);
+            PointerArray[current] = new T(inval);
             numItems++;
             LeftIndex--;
         }
@@ -74,33 +74,37 @@ void MiddleOrderedList<T>::addItem(T inval)
     else
     { // right case
         // find desired index
-        while (PointerArray[current] != nullptr || inval > (*PointerArray[current]) || current == ARRAY_SIZE)
+        while ((PointerArray[current] != nullptr && inval > (*PointerArray[current])) && current != ARRAY_SIZE)
         {
             current++;
         }
+        cout << current << endl;
         if (PointerArray[current] == nullptr) // nullptr case
         {
+            cout << "Thing1 to happen" << endl;
             PointerArray[current] = new T(inval);
             numItems++;
             RightIndex++;
         }
-        else if (current == ARRAY_SIZE - 1 || RightIndex == ARRAY_SIZE) // left shift case (no room on right)
+        else if (current == ARRAY_SIZE || RightIndex == ARRAY_SIZE + 1) // left shift case (no room on right)
         {
+            cout << "Thing2 to happen" << endl;
             for (int i = LeftIndex; i < current; i++)
             {
                 PointerArray[i] = PointerArray[i + 1];
             }
-            PointerArray[current] == new T(inval);
+            PointerArray[current] = new T(inval);
             numItems++;
             LeftIndex--;
         }
-        else // right shift case (room on left to shift)
+        else // right shift case (room on right to shift)
         {
-            for (int i = current; i < RightIndex; i++)
+            cout << "Thing3 to happen" << endl;
+            for (int i = RightIndex; i > current; i--)
             {
-                PointerArray[i + 1] = PointerArray[i];
+                PointerArray[i] = PointerArray[i - 1];
             }
-            PointerArray[current] == new T(inval);
+            PointerArray[current] = new T(inval);
             numItems++;
             RightIndex++;
         }
@@ -161,7 +165,7 @@ int MiddleOrderedList<T>::FindItem(T val)
         {
             if ((*PointerArray[i]) == val)
             {
-                return (PointerArray[i]);
+                return (*PointerArray[i]);
             }
         }
     }

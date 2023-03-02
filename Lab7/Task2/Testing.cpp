@@ -1,5 +1,5 @@
-#pragma once
 #include "MiddleOrderedList.h"
+#include "MiddleOrderedList.cpp"
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -22,12 +22,7 @@ int main()
         cout << endl;
 
         MList.addItem(number);
-
-        MList.Print();
-
-        cout << "Enter 0 to exit: " << endl;
-        cout << "> ";
-        cin >> number;
-        cout << endl;
+        // MList.addItem(number);
+        cout << MList.Print() << endl;
     }
 }

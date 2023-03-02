@@ -2,6 +2,7 @@
 #define _MiddleOrderedList_
 
 #include "OrderedList.h"
+#include "OrderedList.cpp"
 #include <string>
 
 using namespace std;

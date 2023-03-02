@@ -32,7 +32,7 @@ void OrderedList<T>::addItem(T inval)
     }
 
     // no shifting case
-    if (PointerArray[numItems - 1] < inval)
+    if ((*PointerArray[numItems - 1]) < inval)
     {
         PointerArray[numItems] = new T(inval);
         numItems++;
@@ -95,9 +95,9 @@ int OrderedList<T>::FindItem(T val)
 {
     for (int i = 0; i < numItems; i++)
     {
-        if (PointerArray[i] == val)
+        if ((*PointerArray[i]) == val)
         {
-            return (PointerArray[i]);
+            return (*PointerArray[i]);
         }
     }
     throw ItemNotFoundException();
