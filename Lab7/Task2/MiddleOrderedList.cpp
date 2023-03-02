@@ -1,3 +1,4 @@
+#pragma once
 #include "MiddleOrderedList.h"
 #include <iomanip>
 #include <iostream>
@@ -7,12 +8,16 @@ using namespace std;
 template <class T>
 MiddleOrderedList<T>::MiddleOrderedList()
 {
-    PointerArray = new T *[ARRAY_SIZE - 1];
+    PointerArray = new T *[ARRAY_SIZE];
     Size = ARRAY_SIZE;
     MiddleIndex = (ARRAY_SIZE / 2);
     RightIndex = (MiddleIndex + 1);
     LeftIndex = (MiddleIndex - 1);
     numItems = 0;
+    for (int i = 0; i < Size; i++)
+    {
+        PointerArray[i] = nullptr;
+    }
 }
 
 template <class T>
@@ -75,7 +80,7 @@ void MiddleOrderedList<T>::addItem(T inval)
     else
     { // right case
         // find desired index
-        while ((PointerArray[current] != nullptr && inval > (*PointerArray[current])) && current != ARRAY_SIZE)
+        while ((PointerArray[current] != nullptr && inval > (*PointerArray[current])) && current != ARRAY_SIZE - 1)
         {
             current++;
         }
@@ -87,7 +92,7 @@ void MiddleOrderedList<T>::addItem(T inval)
             numItems++;
             RightIndex++;
         }
-        else if (current == ARRAY_SIZE || RightIndex == ARRAY_SIZE + 1) // left shift case (no room on right)
+        else if (current == ARRAY_SIZE - 1 || RightIndex == ARRAY_SIZE) // left shift case (no room on right)
         {
             cout << "Thing2 to happen" << endl;
             for (int i = LeftIndex; i < current; i++)

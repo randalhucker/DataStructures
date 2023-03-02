@@ -1,3 +1,4 @@
+#pragma once
 #ifndef _OrderedList_
 #define _OrderedList_
 

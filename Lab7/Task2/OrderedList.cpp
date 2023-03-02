@@ -1,3 +1,4 @@
+#pragma once
 #include "OrderedList.h"
 #include <iomanip>
 #include <iostream>

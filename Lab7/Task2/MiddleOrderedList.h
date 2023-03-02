@@ -1,3 +1,4 @@
+#pragma once
 #ifndef _MiddleOrderedList_
 #define _MiddleOrderedList_
 

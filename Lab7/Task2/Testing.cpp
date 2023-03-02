@@ -1,3 +1,4 @@
+#pragma once
 #include "MiddleOrderedList.h"
 #include "MiddleOrderedList.cpp"
 #include <iostream>
@@ -11,6 +12,7 @@ using namespace std;
 int main()
 {
     MiddleOrderedList<int> MList = MiddleOrderedList<int>();
+    OrderedList<int> OList = OrderedList<int>();
     int number = 1;
 
     while (number != 0)
@@ -21,8 +23,8 @@ int main()
         cin >> number;
         cout << endl;
 
-        MList.addItem(number);
+        OList.addItem(number);
         // MList.addItem(number);
-        cout << MList.Print() << endl;
+        cout << OList.Print() << endl;
     }
 }
