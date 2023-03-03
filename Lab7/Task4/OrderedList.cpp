@@ -2,6 +2,7 @@
 #include "OrderedList.h"
 #include <iomanip>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -120,6 +121,13 @@ int OrderedList<T>::FindItem(T val)
 }
 
 template <class T>
+string OrderedList<T>::PrintStats()
+{
+    string ret = "Number of Comparisons: " + to_string(numComps) + "\n" + "Number of Moves: " + to_string(numMoves);
+    return (ret);
+}
+
+template <class T>
 string OrderedList<T>::Print()
 {
     string ret = "";
@@ -135,12 +143,5 @@ string OrderedList<T>::Print()
             ret += " ";
         }
     }
-    return (ret);
-}
-
-template <class T>
-string OrderedList<T>::PrintStats()
-{
-    string ret = "Number of Comparisons: " + to_string(numComps) + "\n" + "Number of Moves: " + to_string(numMoves);
     return (ret);
 }

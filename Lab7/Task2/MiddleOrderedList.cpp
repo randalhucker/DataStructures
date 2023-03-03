@@ -177,7 +177,7 @@ int MiddleOrderedList<T>::FindItem(T val) // returns index of the value passed i
     }
     else
     {
-        for (int i = MiddleIndex; i > LeftIndex + 1; i--)
+        for (int i = MiddleIndex; i >= LeftIndex + 1; i--)
         {
             if ((*PointerArray[i]) == val)
             {
