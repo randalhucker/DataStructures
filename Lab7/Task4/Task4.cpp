@@ -23,7 +23,6 @@ int main()
     int numCheck = 0;
     int x, y, z;
 
-
     for (int i = 0; i < 100; i++)
     {
         // start of one 'run' of the program
@@ -69,6 +68,7 @@ int main()
             }
         }
     }
+
     cout << "OrderedList Stats: " << endl;
     cout << OList.PrintStats() << endl
          << endl;
