@@ -8,7 +8,7 @@ using namespace std;
 template <class T>
 SpacedOrderedList<T>::SpacedOrderedList()
 {
-    PointerArray = new T * [ARRAY_SIZE];
+    PointerArray = new T *[ARRAY_SIZE];
     Size = ARRAY_SIZE;
     numItems = 0;
     indexMax = 0;
@@ -23,9 +23,9 @@ SpacedOrderedList<T>::SpacedOrderedList()
 template <class T>
 void SpacedOrderedList<T>::addItem(T inval)
 {
-    int i;   // counter to hold place where we want to insert inval
-    int nl;   // counter to hold index of first null pointer to the left of the desired index
-    int nr;   // counter to hold index of first null pointer to the right of the desired index
+    int i;  // counter to hold place where we want to insert inval
+    int nl; // counter to hold index of first null pointer to the left of the desired index
+    int nr; // counter to hold index of first null pointer to the right of the desired index
 
     // list full case
     if (isFull())
@@ -57,13 +57,15 @@ void SpacedOrderedList<T>::addItem(T inval)
     int moreIndex = 0;
 
     // loop to find index of lesser and greater item
-    for (i = 0; i <= indexMax; i++) 
+    for (i = 0; i <= indexMax; i++)
     {
         numComps++;
-        if (i == indexMax) {
+        if (i == indexMax)
+        {
             break;
         }
-        else if ((PointerArray[i] != nullptr) && (*PointerArray[i] < inval)) {
+        else if ((PointerArray[i] != nullptr) && (*PointerArray[i] < inval))
+        {
             lessIndex = i;
             numComps++;
         }
@@ -80,24 +82,32 @@ void SpacedOrderedList<T>::addItem(T inval)
     {
         i = lessIndex + 2;
     }
-    else {
+    else
+    {
         i = lessIndex + 1;
     }
 
-
-    if (PointerArray[i] == nullptr) {  // no shift case
+    if (PointerArray[i] == nullptr)
+    { // no shift case
         PointerArray[i] = new T(inval);
         numMoves++;
         numItems++;
         return;
     }
-    else { // shift case
+    else
+    { // shift case
         nl = i;
         nr = i;
         while (PointerArray[nl] != nullptr && PointerArray[nr] != nullptr)
         {
-            if (nl > 0) { nl--; }
-            if (nr < 24) { nr++; } 
+            if (nl > 0)
+            {
+                nl--;
+            }
+            if (nr < 24)
+            {
+                nr++;
+            }
             numComps++;
         }
         if (PointerArray[nl] == nullptr) // left shift is easiest
@@ -106,7 +116,8 @@ void SpacedOrderedList<T>::addItem(T inval)
             {
                 numMoves++;
                 PointerArray[j] = PointerArray[j + 1];
-                if (moreIndex - lessIndex == 1) {
+                if (moreIndex - lessIndex == 1)
+                {
                     i -= 1;
                 }
             }
@@ -181,7 +192,8 @@ void SpacedOrderedList<T>::MakeEmpty()
     for (int i = 0; i < Size; i++)
     {
         PointerArray[i] = nullptr;
-    }    numItems = 0;
+    }
+    numItems = 0;
 }
 
 template <class T>
@@ -214,12 +226,12 @@ string SpacedOrderedList<T>::Print()
             ret += " ";
         }
     }
-    return(ret);
- }
+    return (ret);
+}
 
 template <class T>
 string SpacedOrderedList<T>::PrintStats()
 {
     string ret = "Number of Comparisons: " + to_string(numComps) + "\n" + "Number of Moves: " + to_string(numMoves);
-    return(ret);
+    return (ret);
 }

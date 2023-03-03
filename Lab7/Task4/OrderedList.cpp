@@ -121,13 +121,6 @@ int OrderedList<T>::FindItem(T val)
 }
 
 template <class T>
-string OrderedList<T>::PrintStats()
-{
-    string ret = "Number of Comparisons: " + to_string(numComps) + "\n" + "Number of Moves: " + to_string(numMoves);
-    return (ret);
-}
-
-template <class T>
 string OrderedList<T>::Print()
 {
     string ret = "";
@@ -143,5 +136,17 @@ string OrderedList<T>::Print()
             ret += " ";
         }
     }
+    return (ret);
+}
+
+template <class T>
+string OrderedList<T>::PrintStats()
+{
+    string ret = "";
+    ret += "Number of Comparisons: ";
+    ret += to_string(numComps);
+    ret += "\n";
+    ret += "Number of Moves: ";
+    ret += to_string(numMoves);
     return (ret);
 }

@@ -7,7 +7,6 @@
 #include <iomanip>
 #include <fstream>
 #include <string>
-#include <sstream>
 #include <vector>
 #include <cstdlib>
 
@@ -15,6 +14,43 @@ using namespace std;
 
 int main()
 {
+    srand((unsigned)time(NULL));
+    /*
+    int number = 1;
+    int ans = 1;
+    MiddleOrderedList<int> MList = MiddleOrderedList<int>();
+    while (ans != 0)
+    {
+        if (ans == 1)
+        {
+            cout << "Enter Number to add: " << endl;
+            cout << "> ";
+            cin >> number;
+            cout << endl;
+
+            // OList.addItem(number);
+            MList.addItem(number);
+            //SList.addItem(number);
+            cout << MList.Print() << endl;
+        }
+        else if (ans == 2)
+        {
+            cout << "Enter Number to remove: " << endl;
+            cout << "> ";
+            cin >> number;
+            cout << endl;
+            // int x = OList.removeItem(number);
+            int x = MList.removeItem(number);
+            //int x = SList.removeItem(number);
+            cout << MList.Print() << endl;
+        }
+
+        cout << "Enter 0 to quit, 1 to add, 2 to remove: " << endl;
+        cout << "> ";
+        cin >> ans;
+        cout << endl;
+    } */
+
     vector<int> rVector = {};
     vector<int> eVector = {};
     MiddleOrderedList<int> MList = MiddleOrderedList<int>();
@@ -26,17 +62,16 @@ int main()
     for (int i = 0; i < 100; i++)
     {
         // start of one 'run' of the program
-
         for (int i = 0; i < 25; i++)
         {
             rVector.push_back((rand() % 101)); // random vector (things to add)
         }
 
-        while (!rVector.empty())
+        while (!rVector.empty() || !eVector.empty())
         {
             if (!eVector.empty()) // erase vector (things to remove)
             {
-                if (((rand() % 1)) == 1)
+                if (((rand() % 20) + 1) > 10 && !rVector.empty())
                 { // Add Item Case
                     numCheck = (rand() % rVector.size());
                     OList.addItem(rVector[numCheck]);
@@ -67,6 +102,10 @@ int main()
                 rVector.pop_back();
             }
         }
+
+        OList.MakeEmpty();
+        MList.MakeEmpty();
+        SList.MakeEmpty();
     }
 
     cout << "OrderedList Stats: " << endl;

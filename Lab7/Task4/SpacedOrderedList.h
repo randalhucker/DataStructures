@@ -13,7 +13,7 @@ template <class T>
 class SpacedOrderedList : protected OrderedList<T>
 {
 protected:
-    T** PointerArray;
+    T **PointerArray;
     int Size;
     int numItems;
     int indexMax;
@@ -31,7 +31,6 @@ public:
     virtual void MakeEmpty();
     virtual string Print();
     string PrintStats();
-
 };
 
 #endif

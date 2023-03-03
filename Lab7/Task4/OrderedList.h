@@ -29,7 +29,6 @@ public:
     virtual void MakeEmpty();
     string Print();
     string PrintStats();
-
 };
 
 #endif
