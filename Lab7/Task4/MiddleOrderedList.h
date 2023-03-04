@@ -32,6 +32,9 @@ public:
     void MakeEmpty();
     string Print();
     string PrintStats();
+
+    int getRight();
+    int getLeft();
 };
 
 #endif

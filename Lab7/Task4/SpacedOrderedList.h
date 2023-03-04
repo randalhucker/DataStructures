@@ -31,6 +31,8 @@ public:
     virtual void MakeEmpty();
     virtual string Print();
     string PrintStats();
+
+    int getIndexMax();
 };
 
 #endif

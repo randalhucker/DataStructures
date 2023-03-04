@@ -39,6 +39,7 @@ void SpacedOrderedList<T>::addItem(T inval)
         PointerArray[0] = new T(inval);
         numMoves++;
         numItems++;
+        indexMax = 0;
         return;
     }
 
@@ -48,8 +49,9 @@ void SpacedOrderedList<T>::addItem(T inval)
         numComps++;
         PointerArray[indexMax + 2] = new T(inval);
         numMoves++;
-        indexMax += 2;
         numItems++;
+        // cout << "This ran" << endl;
+        indexMax = indexMax + 2;
         return;
     }
 
@@ -78,7 +80,15 @@ void SpacedOrderedList<T>::addItem(T inval)
     }
 
     // logic to get index to insert at
-    if (moreIndex - lessIndex > 2)
+    if (moreIndex == 1 && PointerArray[lessIndex] == nullptr)
+    {
+        i = 0;
+    }
+    else if (moreIndex == 0 && lessIndex == 0)
+    {
+        i = 0;
+    }
+    else if (moreIndex - lessIndex > 2)
     {
         i = lessIndex + 2;
     }
@@ -112,7 +122,7 @@ void SpacedOrderedList<T>::addItem(T inval)
         }
         if (PointerArray[nl] == nullptr) // left shift is easiest
         {
-            for (int j = nl; j < i - 1; j++) // loop to shift other items left
+            for (int j = nl; j < i; j++) // loop to shift other items left
             {
                 numMoves++;
                 PointerArray[j] = PointerArray[j + 1];
@@ -142,6 +152,16 @@ void SpacedOrderedList<T>::addItem(T inval)
             }
         }
     }
+
+    // loop to reset max index
+    for (int i = Size - 1; i > 0; i--)
+    {
+        if (PointerArray[i] != nullptr)
+        {
+            indexMax = i;
+            break;
+        }
+    }
 }
 
 template <class T>
@@ -158,16 +178,17 @@ T SpacedOrderedList<T>::removeItem(T n)
     PointerArray[index] = nullptr;
 
     // loop to reset max index
+    for (int i = indexMax; i > 0; i--)
+    {
+        if (PointerArray[i] != nullptr)
+        {
+            indexMax = i;
+            break;
+        }
+    }
     if (PointerArray[indexMax] == nullptr)
     {
-        for (int i = indexMax; i > 0; i--)
-        {
-            if (PointerArray[i] != nullptr)
-            {
-                indexMax = i;
-                break;
-            }
-        }
+        indexMax = 0;
     }
     numItems--;
     return retval;
@@ -234,4 +255,10 @@ string SpacedOrderedList<T>::PrintStats()
 {
     string ret = "Number of Comparisons: " + to_string(numComps) + "\n" + "Number of Moves: " + to_string(numMoves);
     return (ret);
+}
+
+template <class T>
+int SpacedOrderedList<T>::getIndexMax()
+{
+    return (indexMax);
 }
