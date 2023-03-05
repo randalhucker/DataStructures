@@ -74,11 +74,11 @@ int main()
         {
             if (!eVector.empty()) // erase vector (things to remove)
             {
-                if (((rand() % 20) + 1) > 10 && !rVector.empty())
+                if (((rand() % 20) + 1) > 10 && !rVector.empty() && !MList.isFull() && !OList.isFull() && !SList.isFull())
                 { // Add Item Case
                     numCheck = (rand() % rVector.size());
                     // cout << "Add " << rVector[numCheck] << " Right: " << MList.getRight() << " Left: " << MList.getLeft() << endl;
-                    // cout << MList.Print() << endl << endl;
+                    // cout << MList.Print() << endl;
                     MList.addItem(rVector[numCheck]);
                     OList.addItem(rVector[numCheck]);
                     SList.addItem(rVector[numCheck]);
@@ -92,12 +92,12 @@ int main()
                     numCheck = (rand() % eVector.size());
                     // cout << "Remove " << eVector[numCheck] << " Right: " << MList.getRight() << " Left: " << MList.getLeft() << endl;
                     // cout << "Cout Check" << endl;
-                    // cout << MList.Print() << endl << endl;
+                    // cout << MList.Print() << endl;
                     // cout << "Cout Check" << endl;
                     y = MList.removeItem(eVector[numCheck]);
                     x = OList.removeItem(eVector[numCheck]);
                     z = SList.removeItem(eVector[numCheck]);
-                    // cout << MList.Print() <<endl << endl;
+                    // cout << MList.Print() << endl << endl;
                     swap(eVector[numCheck], eVector.back());
                     eVector.pop_back();
                 }

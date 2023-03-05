@@ -45,6 +45,11 @@ void MiddleOrderedList<T>::addItem(T inval)
     int current = MiddleIndex;
     // left case
 
+    if (LeftIndex <= 0 || RightIndex >= 10)
+    {
+        int x = 1;
+    }
+
     if (inval < (*PointerArray[MiddleIndex]))
     {
         numComps++;
@@ -54,11 +59,34 @@ void MiddleOrderedList<T>::addItem(T inval)
             numComps++;
             current--;
         }
+        if (current != 0 && PointerArray[current - 1] != nullptr && *PointerArray[current - 1] > inval)
+        {
+            numComps++;
+            current--;
+        }
+        if (PointerArray[current] != nullptr && *PointerArray[current] < inval && RightIndex == -1)
+        {
+            current++;
+            numComps++;
+        }
         if (PointerArray[current] == nullptr) // nullptr case
         {
             PointerArray[current] = new T(inval);
             numItems++;
             LeftIndex--;
+            numMoves++;
+        }
+        else if (LeftIndex == -1 || current == 0) // right shift case (no room on left) PROBLEM CASE
+        {
+            for (int i = RightIndex; i > current; i--)
+            {
+                PointerArray[i] = PointerArray[i - 1];
+                numMoves++;
+            }
+            PointerArray[current] = new T(inval);
+            numItems++;
+            RightIndex++;
+            // LeftIndex++;
             numMoves++;
         }
         else if (current == 0)
@@ -71,20 +99,7 @@ void MiddleOrderedList<T>::addItem(T inval)
             PointerArray[current] = new T(inval);
             numItems++;
             RightIndex++;
-            LeftIndex++;
-            numMoves++;
-        }
-        else if (LeftIndex == -1 || current == 0) // right shift case (no room on left) PROBLEM CASE
-        {
-            for (int i = RightIndex; i >= current; i--)
-            {
-                PointerArray[i] = PointerArray[i - 1];
-                numMoves++;
-            }
-            PointerArray[current] = new T(inval);
-            numItems++;
-            RightIndex++;
-            LeftIndex++;
+            // LeftIndex++;
             numMoves++;
         }
         else // left shift case (room on left to shift)
@@ -104,10 +119,14 @@ void MiddleOrderedList<T>::addItem(T inval)
     else
     { // right case
         // find desired index
-        while ((PointerArray[current] != nullptr && inval > (*PointerArray[current])) && current != ARRAY_SIZE - 1)
+        while (current != ARRAY_SIZE - 1 && (PointerArray[current] != nullptr && inval > (*PointerArray[current])))
         {
             current++;
             numComps++;
+        }
+        if (PointerArray[current] != nullptr && *PointerArray[current] > inval && RightIndex == ARRAY_SIZE)
+        {
+            current--;
         }
         if (PointerArray[current] == nullptr) // nullptr case
         {
@@ -116,9 +135,21 @@ void MiddleOrderedList<T>::addItem(T inval)
             RightIndex++;
             numMoves++;
         }
-        else if (RightIndex == ARRAY_SIZE || current == ARRAY_SIZE - 1) // left shift case (no room on right) PROBLEM CASE
+        else if (RightIndex == ARRAY_SIZE && LeftIndex != -1) // left shift case (no room on right) PROBLEM CASE
         {
-            for (int i = LeftIndex; i < current; i++)
+            for (int i = LeftIndex; i < current; i++) // ADDED
+            {
+                PointerArray[i] = PointerArray[i + 1];
+                numMoves++;
+            }
+            PointerArray[current] = new T(inval);
+            numItems++;
+            LeftIndex--;
+            numMoves++;
+        }
+        else if (current == ARRAY_SIZE - 1 && LeftIndex != -1) // left shift case (no room on right) PROBLEM CASE
+        {
+            for (int i = LeftIndex; i < current; i++) // ADDED
             {
                 PointerArray[i] = PointerArray[i + 1];
                 numMoves++;
@@ -146,6 +177,11 @@ void MiddleOrderedList<T>::addItem(T inval)
 template <class T>
 T MiddleOrderedList<T>::removeItem(T n)
 {
+    if (LeftIndex <= 0 || RightIndex >= 10)
+    {
+        int x = 1;
+    }
+
     if (isEmpty())
     {
         throw EmptyListException();
@@ -178,7 +214,7 @@ T MiddleOrderedList<T>::removeItem(T n)
             PointerArray[i] = PointerArray[i + 1];
             numMoves++;
         }
-        RightIndex--;
+        RightIndex--; // Maybe
         PointerArray[RightIndex] = nullptr;
         numMoves++;
     }

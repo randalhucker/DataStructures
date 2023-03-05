@@ -6,7 +6,7 @@
 
 using namespace std;
 
-const int ARRAY_SIZE = 25;
+const int ARRAY_SIZE = 50;
 
 template <class T>
 OrderedList<T>::OrderedList()
@@ -28,6 +28,7 @@ void OrderedList<T>::addItem(T inval)
     // list full case
     if (isFull())
     {
+        cout << "Got Full" << endl;
         throw FullListException();
     }
 
@@ -74,6 +75,7 @@ T OrderedList<T>::removeItem(T n)
 {
     if (isEmpty())
     {
+        cout << "Got Empty" << endl;
         throw EmptyListException();
     }
     int index = FindItem(n);
