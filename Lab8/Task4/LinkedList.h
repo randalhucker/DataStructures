@@ -28,6 +28,7 @@ public:
 
     bool IsInList(T* item);
     bool isEmpty();
+    bool Available(string s);
 
     int Size();
 

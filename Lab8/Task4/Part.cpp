@@ -1,16 +1,19 @@
 #pragma once
 #include "Part.h"
 #include <cstdio>
-#include <cstring>  
+#include <cstring>
 #include <cmath>
 #include <ctime>
 #include <stdio.h>
 #include <string.h>
 #include <vector>
+#include <time.h>
+#include <ctime>
 
 using namespace std;
 
-Part::Part(string d, string uom, int sku, int p, int lt) {
+Part::Part(string d, string uom, int sku, int p, int lt)
+{
     Desc = d;
     UOM = uom;
     SKU = sku;
@@ -19,7 +22,8 @@ Part::Part(string d, string uom, int sku, int p, int lt) {
     QOH = 0;
 };
 
-Part::Part(string d, string uom, int sku, int p, int lt, int qoh) {
+Part::Part(string d, string uom, int sku, int p, int lt, int qoh)
+{
     Desc = d;
     UOM = uom;
     SKU = sku;
@@ -28,7 +32,7 @@ Part::Part(string d, string uom, int sku, int p, int lt, int qoh) {
     QOH = qoh;
 };
 
-Part::Part(Part* CPart)
+Part::Part(Part *CPart)
 {
     Desc = CPart->Desc;
     UOM = CPart->UOM;
@@ -38,85 +42,104 @@ Part::Part(Part* CPart)
     QOH = CPart->QOH;
 }
 
-string Part::GetPartInfo() {
+string Part::GetPartInfo()
+{
     return ("SKU: " + to_string(SKU) + " Desc: " + Desc);
 }
 
-int Part::GetPrice() {
-    return(Price);
+int Part::GetPrice()
+{
+    return (Price);
 }
 
 int Part::GetSKU()
 {
-    return(SKU);
+    return (SKU);
 }
 
 int Part::GetQOH()
 {
-    return(QOH);
+    return (QOH);
 }
 
-bool Part::InStock() {
-    return(QOH > 0);
+bool Part::InStock()
+{
+    return (QOH > 0);
+}
+
+int Part::rdn(int y, int m, int d)
+{ /* Rata Die day one is 0001-01-01 */
+    if (m < 3)
+        y--, m += 12;
+    return 365 * y + y / 4 - y / 100 + y / 400 + (153 * m - 457) / 5 + d - 306;
 }
 
 // need to fix
-bool Part::Availaible(string d) {
-    /*if (QOH > 0) {
-        return true;
-    }
-    vector<char> vect;
-
-    //time_t ttime = time(0);
-    time_t ttime = time(NULL);
-    struct tm buf;
-    tm *local_time = localtime_s(&ttime, &buf);
-    int cmonth = 1 + local_time->tm_mon;
-    int cday = local_time->tm_mday;
-    int nmonth;
-    int nday;
-
-    char * ptr;
-    while ((*ptr) != ' ')
+bool Part::Availaible(string d)
+{
+    if (QOH > 0)
     {
-        vect.push_back(*ptr);
-        ptr += 1;
-    }
-    if (nmonth == cmonth && nday-cday < LeadTime){
         return true;
     }
-    else{
-        return false;
-    }
-    */
 
-    return(true);
+    int day, month, year;
+    size_t pos = 0;
+    string date;
+    string delim = "/";
+    time_t t = time(NULL);
+    tm *timePtr = localtime(&t);
+    pos = d.find(delim);
+    day = stoi(d.substr(0, pos)); // store the substring
+    d.erase(0, pos + delim.length());
+
+    pos = d.find(delim);
+    month = stoi(d.substr(0, pos)); // store the substring
+    d.erase(0, pos + delim.length());
+
+    pos = d.find(delim);
+    year = stoi(d.substr(0, pos)); // store the substring
+    d.erase(0, pos + delim.length());
+
+    if (rdn(year, month, day) - rdn(timePtr->tm_year, timePtr->tm_mon, timePtr->tm_mday) > 0)
+    {
+        return true;
+    }
+
+    return false;
 }
 
-bool Part::operator>(Part& P) {
+bool Part::operator>(Part &P)
+{
     return (this->SKU > P.SKU);
 }
 
-bool Part::operator<(Part& P) {
+bool Part::operator<(Part &P)
+{
     return (this->SKU < P.SKU);
 }
 
-bool Part::operator==(Part& P) {
+bool Part::operator==(Part &P)
+{
     return (this->SKU == P.SKU);
 }
 
-bool Part::operator!=(Part& P) {
+bool Part::operator!=(Part &P)
+{
     return (this->SKU != P.SKU);
 }
 
-void Part::Display() {
+void Part::Display()
+{
     cout << "--------------------------------------------" << endl;
     ascii_art("SKU: " + to_string(this->GetSKU()));
-    cout << endl << endl;
+    cout << endl
+         << endl;
     ascii_art("QOH: " + to_string(this->GetQOH()));
-    cout << endl << endl;
+    cout << endl
+         << endl;
     ascii_art("Price: " + to_string(this->GetPrice()));
-    cout << endl << endl;
+    cout << endl
+         << endl;
     cout << "--------------------------------------------" << endl;
 }
 
@@ -128,7 +151,8 @@ void Part::Display() {
 // Code version: 1.0
 // Source Code
 // URL: https://lordhypersonic.blogspot.com/2019/02/c-ascii-art-generator.html
-void Part::ascii_art(string input) {
+void Part::ascii_art(string input)
+{
     for (int i = 0; i < input.size(); i++)
     {
         if (input[i] == 'A' || input[i] == 'a')
@@ -271,7 +295,7 @@ void Part::ascii_art(string input) {
             cout << " ___   ";
     }
     cout << endl;
-    //loop will print second layer
+    // loop will print second layer
     for (int i = 0; i < input.size(); i++)
     {
         if (input[i] == 'A' || input[i] == 'a')
@@ -414,7 +438,7 @@ void Part::ascii_art(string input) {
             cout << "|__ \\  ";
     }
     cout << endl;
-    //loop will print third layer
+    // loop will print third layer
     for (int i = 0; i < input.size(); i++)
     {
         if (input[i] == 'A' || input[i] == 'a')
@@ -557,7 +581,7 @@ void Part::ascii_art(string input) {
             cout << "   ) | ";
     }
     cout << endl;
-    //loop will print fourth layer
+    // loop will print fourth layer
     for (int i = 0; i < input.size(); i++)
     {
         if (input[i] == 'A' || input[i] == 'a')
@@ -700,7 +724,7 @@ void Part::ascii_art(string input) {
             cout << "  / /  ";
     }
     cout << endl;
-    //loop will print fifth layer
+    // loop will print fifth layer
     for (int i = 0; i < input.size(); i++)
     {
         if (input[i] == 'A' || input[i] == 'a')
@@ -843,7 +867,7 @@ void Part::ascii_art(string input) {
             cout << " |_|   ";
     }
     cout << endl;
-    //loop will print sixth layer
+    // loop will print sixth layer
     for (int i = 0; i < input.size(); i++)
     {
         if (input[i] == 'A' || input[i] == 'a')

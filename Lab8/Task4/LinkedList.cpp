@@ -18,7 +18,7 @@ LinkedList<T>::~LinkedList()
 }
 
 template <class T>
-void LinkedList<T>::AddItem(T* item) // only changes current if inserting to an empty list
+void LinkedList<T>::AddItem(T *item) // only changes current if inserting to an empty list
 {
     if (isEmpty())
     { // empty list case
@@ -28,7 +28,7 @@ void LinkedList<T>::AddItem(T* item) // only changes current if inserting to an 
     }
     else if ((*item) < (*head->data))
     { // head case
-        Node<T>* h = new Node<T>(item);
+        Node<T> *h = new Node<T>(item);
         h->next = head;
         h->prev = nullptr;
         head->prev = h;
@@ -37,14 +37,14 @@ void LinkedList<T>::AddItem(T* item) // only changes current if inserting to an 
     }
     else
     { // insert middle and tail cases
-        Node<T>* temp = head;
+        Node<T> *temp = head;
         while ((temp->next != nullptr) && ((*temp->next->data) < (*item)))
         {
             temp = temp->next;
         }
         if (temp->next == nullptr) // tail case
         {
-            Node<T>* newNode = new Node<T>(item);
+            Node<T> *newNode = new Node<T>(item);
             newNode->next = nullptr;
             newNode->prev = temp;
             temp->next = newNode;
@@ -52,7 +52,7 @@ void LinkedList<T>::AddItem(T* item) // only changes current if inserting to an 
         }
         else // middle case
         {
-            Node<T>* newNode = new Node<T>(item);
+            Node<T> *newNode = new Node<T>(item);
             newNode->prev = temp;
             newNode->next = temp->next;
             temp->next->prev = newNode;
@@ -63,9 +63,10 @@ void LinkedList<T>::AddItem(T* item) // only changes current if inserting to an 
 }
 
 template <class T>
-T* LinkedList<T>::GetItem(T* item)
+T *LinkedList<T>::GetItem(T *item)
 {
-    if (isEmpty()) {
+    if (isEmpty())
+    {
         throw EmptyListException();
     }
     if (!IsInList(item))
@@ -73,13 +74,14 @@ T* LinkedList<T>::GetItem(T* item)
         throw ItemNotFoundException();
     }
 
-    Node<T>* temp = head;
+    Node<T> *temp = head;
 
-    while ((*temp->data) != (*item)) {
+    while ((*temp->data) != (*item))
+    {
         temp = temp->next;
     }
 
-    T* ret = new T(temp->data);
+    T *ret = new T(temp->data);
 
     if (temp->prev == nullptr)
     { // head case
@@ -89,10 +91,11 @@ T* LinkedList<T>::GetItem(T* item)
             current = nullptr;
             delete temp;
             length--;
-            return(ret);
+            return (ret);
         }
 
-        if (temp->next != nullptr) {
+        if (temp->next != nullptr)
+        {
             head = temp->next;
             head->prev = nullptr;
         }
@@ -130,15 +133,18 @@ T* LinkedList<T>::GetItem(T* item)
 }
 
 template <class T>
-bool LinkedList<T>::IsInList(T* item)
+bool LinkedList<T>::IsInList(T *item)
 {
-    if (isEmpty()) {
+    if (isEmpty())
+    {
         throw EmptyListException();
     }
-    Node<T>* temp = head;
+    Node<T> *temp = head;
 
-    while (temp != nullptr) {
-        if (*temp->data == *item) {
+    while (temp != nullptr)
+    {
+        if (*temp->data == *item)
+        {
             return true;
         }
         temp = temp->next;
@@ -163,9 +169,10 @@ int LinkedList<T>::Size()
 }
 
 template <class T>
-T* LinkedList<T>::SeeNext()
+T *LinkedList<T>::SeeNext()
 {
-    if (isEmpty()) {
+    if (isEmpty())
+    {
         throw EmptyListException();
     }
     if (current == nullptr || current->next == nullptr)
@@ -174,13 +181,14 @@ T* LinkedList<T>::SeeNext()
         return nullptr;
     }
     current = current->next;
-    return(current->data);
+    return (current->data);
 }
 
 template <class T>
-T* LinkedList<T>::SeePrev()
+T *LinkedList<T>::SeePrev()
 {
-    if (isEmpty()) {
+    if (isEmpty())
+    {
         throw EmptyListException();
     }
     if (current == nullptr || current->prev == nullptr)
@@ -189,32 +197,36 @@ T* LinkedList<T>::SeePrev()
         return nullptr;
     }
     current = current->prev;
-    return(current->data);
+    return (current->data);
 }
 
 template <class T>
-T* LinkedList<T>::SeeAt(int l)
+T *LinkedList<T>::SeeAt(int l)
 {
-    if (l >= length) {
+    if (l >= length)
+    {
         throw EndOfListException();
     }
-    if (isEmpty()) {
+    if (isEmpty())
+    {
         throw EmptyListException();
     }
-    Node<T>* temp = head;
-    for (int i = 0; i < l; i++) {
+    Node<T> *temp = head;
+    for (int i = 0; i < l; i++)
+    {
         temp = temp->next;
     }
-    return(temp->data);
+    return (temp->data);
 }
 
 template <class T>
-T* LinkedList<T>::SeeAt() // not required but makes more sense
+T *LinkedList<T>::SeeAt() // not required but makes more sense
 {
-    if (isEmpty()) {
+    if (isEmpty())
+    {
         throw EmptyListException();
     }
-    return(current->data);
+    return (current->data);
 }
 
 template <class T>
@@ -224,17 +236,25 @@ void LinkedList<T>::Reset()
 }
 
 template <class T>
+bool LinkedList<T>::Available(string s)
+{
+    return (current->data->Availaible(s));
+}
+
+template <class T>
 void LinkedList<T>::PrintAll()
 {
-    if (isEmpty()) {
+    if (isEmpty())
+    {
         throw EmptyListException();
     }
-    Node<T>* temp = current;
+    Node<T> *temp = current;
     current = head;
     ascii_art("null");
     ascii_art("  |");
     SeeAt()->Display();
-    while (current->next != nullptr) {
+    while (current->next != nullptr)
+    {
         ascii_art("  |  |  ");
         cout << endl;
         SeeNext()->Display();
@@ -245,7 +265,8 @@ void LinkedList<T>::PrintAll()
 }
 
 template <class T>
-void LinkedList<T>::ascii_art(string input) {
+void LinkedList<T>::ascii_art(string input)
+{
     for (int i = 0; i < input.size(); i++)
     {
         if (input[i] == 'A' || input[i] == 'a')
@@ -388,7 +409,7 @@ void LinkedList<T>::ascii_art(string input) {
             cout << " ___   ";
     }
     cout << endl;
-    //loop will print second layer
+    // loop will print second layer
     for (int i = 0; i < input.size(); i++)
     {
         if (input[i] == 'A' || input[i] == 'a')
@@ -531,7 +552,7 @@ void LinkedList<T>::ascii_art(string input) {
             cout << "|__ \\  ";
     }
     cout << endl;
-    //loop will print third layer
+    // loop will print third layer
     for (int i = 0; i < input.size(); i++)
     {
         if (input[i] == 'A' || input[i] == 'a')
@@ -674,7 +695,7 @@ void LinkedList<T>::ascii_art(string input) {
             cout << "   ) | ";
     }
     cout << endl;
-    //loop will print fourth layer
+    // loop will print fourth layer
     for (int i = 0; i < input.size(); i++)
     {
         if (input[i] == 'A' || input[i] == 'a')
@@ -817,7 +838,7 @@ void LinkedList<T>::ascii_art(string input) {
             cout << "  / /  ";
     }
     cout << endl;
-    //loop will print fifth layer
+    // loop will print fifth layer
     for (int i = 0; i < input.size(); i++)
     {
         if (input[i] == 'A' || input[i] == 'a')
@@ -960,7 +981,7 @@ void LinkedList<T>::ascii_art(string input) {
             cout << " |_|   ";
     }
     cout << endl;
-    //loop will print sixth layer
+    // loop will print sixth layer
     for (int i = 0; i < input.size(); i++)
     {
         if (input[i] == 'A' || input[i] == 'a')

@@ -8,7 +8,7 @@
 
 using namespace std;
 
-vector<Part*> vect;
+vector<Part *> vect;
 
 void showMenu()
 {
@@ -24,9 +24,10 @@ void showMenu()
     cout << "8: SeeAt(int)" << endl; // need to fix
     cout << "9: Reset()" << endl;
     cout << "10: PrintAll() (display function)" << endl;
+    cout << "11: Available" << endl;
 }
 
-Part* createPart()
+Part *createPart()
 {
     int S;
     int P;
@@ -56,12 +57,12 @@ Part* createPart()
     cout << endl;
     if (Q == 0)
     {
-        return(new Part(D, U, S, P, L));
+        return (new Part(D, U, S, P, L));
     }
-    return(new Part(D, U, S, P, L, Q));
+    return (new Part(D, U, S, P, L, Q));
 }
 
-Part* FindPart()
+Part *FindPart()
 {
     int sku = 0;
     cout << "Enter the SKU number of the part you'd like to retrieve / locate. This must be a part you have already created." << endl;
@@ -72,7 +73,7 @@ Part* FindPart()
     {
         if (vect.at(i)->GetSKU() == sku)
         {
-            return(vect.at(i));
+            return (vect.at(i));
         }
     }
     return (nullptr);
@@ -83,11 +84,11 @@ int main()
     int ans = 1;
     int MenuAns = 0;
 
-    LinkedList<Part>* LList = new LinkedList<Part>();
+    LinkedList<Part> *LList = new LinkedList<Part>();
     showMenu(); // gives choices
     cin >> MenuAns;
 
-    Part* p = nullptr;
+    Part *p = nullptr;
     bool e = true;
     int l = 0;
 
@@ -107,9 +108,11 @@ int main()
             {
                 cout << "The SKU number does not match a part that you have created." << endl;
             }
-            else {
-                Part* RetPart = nullptr;
-                try {
+            else
+            {
+                Part *RetPart = nullptr;
+                try
+                {
                     RetPart = LList->GetItem(p);
                     cout << RetPart->GetPartInfo() << endl;
                 }
@@ -124,12 +127,15 @@ int main()
             }
             break;
         case 3: // is in list
-            try {
+            try
+            {
                 e = LList->IsInList(FindPart());
-                if (e) {
+                if (e)
+                {
                     cout << "Your part exists in the system." << endl;
                 }
-                else {
+                else
+                {
                     cout << "Your part doesn't exist in the system." << endl;
                 }
             }
@@ -140,10 +146,12 @@ int main()
             break;
         case 4: // is empty
             e = LList->isEmpty();
-            if (e) {
+            if (e)
+            {
                 cout << "Your list is empty." << endl;
             }
-            else {
+            else
+            {
                 cout << "Your list isn't empty." << endl;
             }
             break;
@@ -151,7 +159,8 @@ int main()
             cout << "Your List has " << LList->Size() << " parts in it." << endl;
             break;
         case 6: // see next
-            try {
+            try
+            {
                 p = LList->SeeNext();
                 if (p == nullptr)
                 {
@@ -160,12 +169,14 @@ int main()
                 }
                 cout << p->GetPartInfo() << endl;
             }
-            catch (EmptyListException ex) {
+            catch (EmptyListException ex)
+            {
                 cout << ex.what();
             }
             break;
         case 7: // see prev
-            try {
+            try
+            {
                 p = LList->SeePrev();
                 if (p == nullptr)
                 {
@@ -174,14 +185,16 @@ int main()
                 }
                 cout << p->GetPartInfo() << endl;
             }
-            catch (EmptyListException ex) {
+            catch (EmptyListException ex)
+            {
                 cout << ex.what();
             }
             break;
         case 8: // see at
             cout << "Enter the location in the list you'd like to see (index). Size of linked list is " << LList->Size() << endl;
             cin >> l;
-            try {
+            try
+            {
                 p = LList->SeeAt(l);
                 cout << p->GetPartInfo() << endl;
             }
@@ -198,13 +211,37 @@ int main()
             LList->Reset();
             break;
         case 10: // print all
-            try {
+            try
+            {
                 LList->PrintAll();
-            
             }
             catch (EmptyListException ex)
             {
                 ex.what();
+            }
+            break;
+        case 11: // available
+            bool availability;
+            try
+            {
+                string avail;
+                cout << "Enter the desired delivery day of the current part (d/m/year): " << endl;
+                cout << "> ";
+                cin >> avail;
+                cout << endl;
+                availability = LList->Available(avail);
+            }
+            catch (EmptyListException ex)
+            {
+                ex.what();
+            }
+            if (availability)
+            {
+                cout << "It'll get here on time!" << endl;
+            }
+            else
+            {
+                cout << "It won't get here on time!" << endl;
             }
             break;
         default:
@@ -212,7 +249,8 @@ int main()
             break;
         }
 
-        if (ans != 0) {
+        if (ans != 0)
+        {
             showMenu(); // gives choices
             cin >> MenuAns;
         }

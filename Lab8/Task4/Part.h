@@ -4,7 +4,6 @@
 
 #include <string>
 #include <iostream>
-#include <conio.h>
 using namespace std;
 
 class Part
@@ -21,20 +20,21 @@ private:
 public:
     // Constructor
     Part(string d, string uom, int sku, int p, int lt);
-    Part(Part* CPart);
+    Part(Part *CPart);
     Part(string d, string uom, int sku, int p, int lt, int qoh);
 
     string GetPartInfo();
     int GetPrice();
     int GetSKU();
     int GetQOH();
+    int rdn(int y, int m, int d);
     bool InStock();
     bool Availaible(string d);
 
-    bool operator>(Part& P);
-    bool operator<(Part& P);
-    bool operator==(Part& P);
-    bool operator!=(Part& P);
+    bool operator>(Part &P);
+    bool operator<(Part &P);
+    bool operator==(Part &P);
+    bool operator!=(Part &P);
 
     void Display();
     void ascii_art(string I);
