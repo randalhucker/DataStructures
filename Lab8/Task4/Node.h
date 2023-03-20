@@ -9,9 +9,9 @@ template <class T>
 class Node
 {
 public:
-    T *data;     // pointer to data of node
-    Node *next; // holds pointer to next node in the list
-    Node *prev; // holds pointer to previous node in the list
+    T* data;     // pointer to data of node
+    Node* next; // holds pointer to next node in the list
+    Node* prev; // holds pointer to previous node in the list
 
     // Constructor (Takes an invalue of type 'T')
     Node(T* inval);

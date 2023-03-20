@@ -12,9 +12,9 @@ template <class T>
 class LinkedList
 {
 private:
-    Node<T> *head;
+    Node<T>* head;
     int length = 0;
-    Node<T> *current;
+    Node<T>* current;
 
 public:
     // constructor and destructor
@@ -36,6 +36,8 @@ public:
     T* SeeAt(int l);
     T* SeeAt();
     T* GetItem(T* item);
+
+    void ascii_art(string input);
 };
 
 #endif

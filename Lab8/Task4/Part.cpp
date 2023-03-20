@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Part::Part(string d, string uom, int sku, int p, int lt){
+Part::Part(string d, string uom, int sku, int p, int lt) {
     Desc = d;
     UOM = uom;
     SKU = sku;
@@ -19,7 +19,7 @@ Part::Part(string d, string uom, int sku, int p, int lt){
     QOH = 0;
 };
 
-Part::Part(string d, string uom, int sku, int p, int lt, int qoh){
+Part::Part(string d, string uom, int sku, int p, int lt, int qoh) {
     Desc = d;
     UOM = uom;
     SKU = sku;
@@ -37,12 +37,12 @@ Part::Part(Part* CPart)
     LeadTime = CPart->LeadTime;
     QOH = CPart->QOH;
 }
-    
-string Part::GetPartInfo(){
-    return ("SKU: "+to_string(SKU)+" Desc: " + Desc);
+
+string Part::GetPartInfo() {
+    return ("SKU: " + to_string(SKU) + " Desc: " + Desc);
 }
 
-int Part::GetPrice(){
+int Part::GetPrice() {
     return(Price);
 }
 
@@ -56,18 +56,17 @@ int Part::GetQOH()
     return(QOH);
 }
 
-bool Part::InStock(){
+bool Part::InStock() {
     return(QOH > 0);
 }
 
 // need to fix
-bool Part::Availaible(string d){ 
+bool Part::Availaible(string d) {
     /*if (QOH > 0) {
         return true;
     }
-
     vector<char> vect;
-    
+
     //time_t ttime = time(0);
     time_t ttime = time(NULL);
     struct tm buf;
@@ -77,14 +76,12 @@ bool Part::Availaible(string d){
     int nmonth;
     int nday;
 
-    
     char * ptr;
     while ((*ptr) != ' ')
-    {  
+    {
         vect.push_back(*ptr);
         ptr += 1;
-    }  
-
+    }
     if (nmonth == cmonth && nday-cday < LeadTime){
         return true;
     }
@@ -96,35 +93,41 @@ bool Part::Availaible(string d){
     return(true);
 }
 
-bool Part::operator>(Part &P){
+bool Part::operator>(Part& P) {
     return (this->SKU > P.SKU);
 }
 
-bool Part::operator<(Part &P){
+bool Part::operator<(Part& P) {
     return (this->SKU < P.SKU);
 }
 
-bool Part::operator==(Part &P){
+bool Part::operator==(Part& P) {
     return (this->SKU == P.SKU);
 }
 
-bool Part::operator!=(Part &P){
+bool Part::operator!=(Part& P) {
     return (this->SKU != P.SKU);
 }
 
-void Part::printASCII() {
-    ascii_art("SKU: ");
-    ascii_art(to_string(this->GetSKU()));
+void Part::Display() {
+    cout << "--------------------------------------------" << endl;
+    ascii_art("SKU: " + to_string(this->GetSKU()));
     cout << endl << endl;
-    ascii_art("QOH: ");
-    ascii_art(to_string(this->GetQOH()));
+    ascii_art("QOH: " + to_string(this->GetQOH()));
     cout << endl << endl;
-    ascii_art("Price: ");
-    ascii_art(to_string(this->GetPrice()));
+    ascii_art("Price: " + to_string(this->GetPrice()));
     cout << endl << endl;
-    cout << "--------------------------------------------" << endl << endl;
+    cout << "--------------------------------------------" << endl;
 }
 
+// function we found that creates ascii art for a string input
+
+// Lord Hypersonic
+// February 01, 2019
+// ASCII Art Generator
+// Code version: 1.0
+// Source Code
+// URL: https://lordhypersonic.blogspot.com/2019/02/c-ascii-art-generator.html
 void Part::ascii_art(string input) {
     for (int i = 0; i < input.size(); i++)
     {

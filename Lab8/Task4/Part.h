@@ -23,7 +23,7 @@ public:
     Part(string d, string uom, int sku, int p, int lt);
     Part(Part* CPart);
     Part(string d, string uom, int sku, int p, int lt, int qoh);
-    
+
     string GetPartInfo();
     int GetPrice();
     int GetSKU();
@@ -31,12 +31,12 @@ public:
     bool InStock();
     bool Availaible(string d);
 
-    bool operator>(Part &P);
-    bool operator<(Part &P);
-    bool operator==(Part &P);
-    bool operator!=(Part &P);
+    bool operator>(Part& P);
+    bool operator<(Part& P);
+    bool operator==(Part& P);
+    bool operator!=(Part& P);
 
-    void printASCII();
+    void Display();
     void ascii_art(string I);
 };
 

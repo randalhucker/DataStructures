@@ -13,7 +13,7 @@ Node<T>::Node()
 template <class T>
 Node<T>::Node(T* inval)
 {
-    data = inval; // remember to delete in destructor
+    data = inval; 
     next = nullptr;
     prev = nullptr;
 }
@@ -25,19 +25,19 @@ Node<T>::~Node()
 }
 
 template <class T>
-void Node<T>::setData(T *inval)
+void Node<T>::setData(T* inval)
 {
     data = inval;
 }
 
 template <class T>
-void Node<T>::setNext(T *n)
+void Node<T>::setNext(T* n)
 {
     next = n;
 }
 
 template <class T>
-void Node<T>::setPrev(T *p)
+void Node<T>::setPrev(T* p)
 {
     prev = p;
 }
