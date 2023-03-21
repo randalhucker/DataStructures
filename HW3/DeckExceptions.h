@@ -3,12 +3,12 @@
 
 using namespace std;
 
-class EmptyListException : public std::exception
+class EmptyDeckException : public std::exception
 {
 public:
     string what() // overrides what() virtual function from exception that returns an explanatory string
     {
-        return "The list is empty. Items cannot be found in or removed from an empty list";
+        return "The deck is empty.";
     }
 };
 
@@ -21,7 +21,7 @@ public:
     }
 };
 
-class EndOfListException : public std::exception
+class EndOfDeckException : public std::exception
 {
 public:
     string what() // overrides what() virtual function from exception that returns an explanatory string
