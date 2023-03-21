@@ -225,7 +225,7 @@ int main()
             try
             {
                 string avail;
-                cout << "Enter the desired delivery day of the current part (d/m/year): " << endl;
+                cout << "Enter the desired delivery day of the current part ex(1/17): " << endl;
                 cout << "> ";
                 cin >> avail;
                 cout << endl;

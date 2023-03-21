@@ -71,10 +71,10 @@ int Part::rdn(int y, int m, int d)
 { /* Rata Die day one is 0001-01-01 */
     if (m < 3)
         y--, m += 12;
-    return 365 * y + y / 4 - y / 100 + y / 400 + (153 * m - 457) / 5 + d - 306;
+    int x = 365 * y + y / 4 - y / 100 + y / 400 + (153 * m - 457) / 5 + d - 306;
+    return x;
 }
 
-// need to fix
 bool Part::Availaible(string d)
 {
     if (QOH > 0)
@@ -82,25 +82,23 @@ bool Part::Availaible(string d)
         return true;
     }
 
-    int day, month, year;
+    int day, month;
     size_t pos = 0;
-    string date;
     string delim = "/";
+
+    pos = d.find(delim);
+    month = stoi(d.substr(0, pos));
+    d.erase(0, pos + delim.length());
+
+    pos = d.find(delim);
+    day = stoi(d.substr(0, pos));
+    d.erase(0, pos + delim.length());
+
     time_t t = time(NULL);
-    tm *timePtr = localtime(&t);
-    pos = d.find(delim);
-    day = stoi(d.substr(0, pos)); // store the substring
-    d.erase(0, pos + delim.length());
+    struct tm now;
+    localtime_s(&now, &t);
 
-    pos = d.find(delim);
-    month = stoi(d.substr(0, pos)); // store the substring
-    d.erase(0, pos + delim.length());
-
-    pos = d.find(delim);
-    year = stoi(d.substr(0, pos)); // store the substring
-    d.erase(0, pos + delim.length());
-
-    if (rdn(year, month, day) - rdn(timePtr->tm_year, timePtr->tm_mon, timePtr->tm_mday) > 0)
+    if ((rdn(123, month, day)- rdn(123, 3, now.tm_mday)) > this->LeadTime)
     {
         return true;
     }
