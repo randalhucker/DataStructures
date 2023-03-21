@@ -5,14 +5,18 @@ class Card
 {
 public:
     int data;   // value of card
+    string suit;
     Card *next; // pointer to next card in the deck
 
     // Constructor (Takes an invalue of type 'int')
-    Card(int inval);
+    Card(int inval, string s);
+    Card();
 
     void setData(int inval);
     void setNext(Card *n);
+    void setSuit(string s);
 
     int getData();
     Card *getNext();
+    string getSuit();
 };

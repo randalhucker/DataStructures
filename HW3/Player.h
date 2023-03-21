@@ -9,9 +9,16 @@ using namespace std;
 class Player
 {
 protected:
-    Deck* Deck;
-    SideDeck* SideDeck;
+    Deck* D;
+    SideDeck* SD;
+    string name;
+
 public:
     Player(); // Default Constructor
+    Player(string n);
     ~Player();
+
+    Deck* getDeck();
+    SideDeck* getSideDeck();
+    string getName();
 };
