@@ -10,7 +10,7 @@ class Player
 {
 protected:
     Deck* Deck;
-    SideDeck* SideDeck
+    SideDeck* SideDeck;
 public:
     Player(); // Default Constructor
     ~Player();
