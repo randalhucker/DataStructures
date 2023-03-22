@@ -20,7 +20,7 @@ public:
     Card *Peek();
 
     void Enqueue(Card *c);
-    
+
     int getLength();
 
     bool isEmpty();
