@@ -10,16 +10,16 @@ class SideDeck
 {
 protected:
     int Top = 0;
-    Card *SD[MaxSize];
+    Card* SD[MaxSize];
 
 public:
     SideDeck();  // Default Constructor
     ~SideDeck(); // Destructor
 
-    Card *Pop();
+    Card* Pop();
 
-    void Push(Card *c);
-    
+    void Push(Card* c);
+
     int getLength();
 
     bool isEmpty();

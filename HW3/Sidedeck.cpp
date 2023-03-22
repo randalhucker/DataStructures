@@ -14,7 +14,7 @@ SideDeck::~SideDeck()
 { // Destructor
 }
 
-void SideDeck::Push(Card *c)
+void SideDeck::Push(Card* c)
 {
     if (Top < 5)
     {
@@ -27,7 +27,7 @@ void SideDeck::Push(Card *c)
     }
 }
 
-Card *SideDeck::Pop()
+Card* SideDeck::Pop()
 {
     if (isEmpty())
     {
@@ -42,7 +42,7 @@ int SideDeck::getLength()
     return (Top);
 }
 
-bool SideDeck::isEmpty(){
+bool SideDeck::isEmpty() {
     if (Top == 0)
     {
         return true;

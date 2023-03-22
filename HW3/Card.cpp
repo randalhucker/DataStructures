@@ -21,7 +21,7 @@ void Card::setData(int inval)
     data = inval;
 }
 
-void Card::setNext(Card *n)
+void Card::setNext(Card* n)
 {
     next = n;
 }
@@ -41,7 +41,7 @@ string Card::getSuit()
     return suit;
 }
 
-Card *Card::getNext()
+Card* Card::getNext()
 {
     return (next);
 }

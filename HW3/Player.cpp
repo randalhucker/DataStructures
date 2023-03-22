@@ -4,15 +4,15 @@
 Player::Player()
 {
     name = "";
-    D = nullptr;
-    SD = nullptr;
+    D = new Deck();
+    SD = new SideDeck();
 }
 
 Player::Player(string n)
 {
     name = n;
-    D = nullptr;
-    SD = nullptr;
+    D = new Deck();
+    SD = new SideDeck();
 }
 
 Player::~Player()

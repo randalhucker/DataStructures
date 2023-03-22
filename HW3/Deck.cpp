@@ -1,7 +1,7 @@
 #pragma once
 #include "Deck.h"
 
-Deck::Deck(Card *h)
+Deck::Deck(Card* h)
 {
     head = h;
 }
@@ -15,7 +15,7 @@ Deck::~Deck()
 {
 }
 
-void Deck::Enqueue(Card *inVal)
+void Deck::Enqueue(Card* inVal)
 {
     if (isEmpty())
     {
@@ -23,7 +23,7 @@ void Deck::Enqueue(Card *inVal)
     }
     else
     {
-        Card *h = inVal;
+        Card* h = inVal;
         h->next = head;
         head = h;
     }
@@ -44,20 +44,26 @@ Card* Deck::Dequeue()
         length--;
         return retval;
     }
-    Card *temp = head;
+    Card* temp = head;
     while (temp->next->next != nullptr)
     {
         temp = temp->next;
     }
-    Card* retval = temp->next;
+    Card* retval = new Card(temp->next->getData(), temp->next->getSuit());
     delete temp->next;
+    temp->next = nullptr;
     length--;
     return retval;
 }
 
 Card* Deck::Peek()
 {
-    return head;
+    Card* temp = head;
+    while (temp->next->next != nullptr)
+    {
+        temp = temp->next;
+    }
+    return temp->next;
 }
 
 bool Deck::isEmpty()
@@ -69,6 +75,6 @@ bool Deck::isEmpty()
     return false;
 }
 
-int Deck::getLength(){
+int Deck::getLength() {
     return length;
 }

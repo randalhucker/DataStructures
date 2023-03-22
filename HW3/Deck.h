@@ -8,18 +8,18 @@ using namespace std;
 class Deck
 {
 private:
-    Card *head = nullptr;
+    Card* head = nullptr;
     int length = 0;
 
 public:
-    Deck(Card *h);
+    Deck(Card* h);
     Deck();
     ~Deck();
 
-    Card *Dequeue();
-    Card *Peek();
+    Card* Dequeue();
+    Card* Peek();
 
-    void Enqueue(Card *c);
+    void Enqueue(Card* c);
 
     int getLength();
 
