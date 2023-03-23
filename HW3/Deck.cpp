@@ -38,7 +38,7 @@ Card* Deck::Dequeue()
     }
     if (length == 1)
     {
-        Card* retval = head;
+        Card* retval = new Card(head->getData(), head->getSuit());
         delete head;
         head = nullptr;
         length--;
