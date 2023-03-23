@@ -12,7 +12,7 @@ Card::Card(int inval, string s)
 Card::Card()
 {
     data = -1;
-    suit = "";
+    suit = " ";
     next = nullptr;
 }
 

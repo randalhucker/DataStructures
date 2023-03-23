@@ -50,6 +50,8 @@ void Deal(Deck* d) // deals the cards to the player
     }
 }
 
+int c = 1; // global number of rounds
+
 void PlayRound()
 {
     string ans;
@@ -100,7 +102,7 @@ void PlayRound()
             cpu->getDeck()->Enqueue(PlayerCard);
             cpu->getDeck()->Enqueue(CpuCard);
         }
-
+        c++;
         break;
     case 2: // place card on side deck
         if (p->getSideDeck()->getLength() > 4)
@@ -131,6 +133,7 @@ void PlayRound()
             cpu->getDeck()->Enqueue(PlayerCard);
             cpu->getDeck()->Enqueue(CpuCard);
         }
+        c++;
         break;
     case 3: // player deck
         cout << "You have " << p->getDeck()->getLength() + p->getSideDeck()->getLength() << " total cards in your deck." << endl;
@@ -169,7 +172,7 @@ void PlayRound()
             cpu->getDeck()->Enqueue(PlayerCard1);
             cpu->getDeck()->Enqueue(CpuCard);
         }
-
+        c++;
         break;
     default:
 
@@ -184,6 +187,11 @@ int main()
     cout << "Please Enter your name: " << endl;
     cout << "> ";
     cin >> name;
+
+    int numrounds = 0;
+    cout << "Enter how many rounds you'd like to play (enter 0 until natural win / loss): " << endl;
+    cout << "> ";
+    cin >> numrounds;
     cout << endl;
 
     string ans = "Y";
@@ -192,29 +200,60 @@ int main()
         // instances fall out of scope at the end of each game and can be recreated with fresh decks
         cpu = new Player("CPU");
         p = new Player(name);
-
         Deal(GenerateDeck()); // generates a shuffled deck of cards and deals them to the players
 
-        while ((p->getDeck()->getLength() + p->getSideDeck()->getLength() > 0) && (cpu->getDeck()->getLength() + cpu->getSideDeck()->getLength() > 0))
+        if (numrounds == 0)
         {
-            PlayRound();
-        }
+            c = 1;
+            while ((p->getDeck()->getLength() + p->getSideDeck()->getLength() > 0) && (cpu->getDeck()->getLength() + cpu->getSideDeck()->getLength() > 0))
+            {
+                cout << "Round " << c << endl << endl;
+                PlayRound();
+            }
 
-        // win / lose case
+            // win / lose case
 
-        if (p->getDeck()->getLength() <= 0 && p->getSideDeck()->getLength() <= 0)
-        {
-            cout << "You lost!!" << endl;
+            if (p->getDeck()->getLength() <= 0 && p->getSideDeck()->getLength() <= 0)
+            {
+                cout << "You lost!!" << endl;
+                cout << "The computer won all your cards!" << endl << endl;
+            }
+            else
+            {
+                cout << "You won!!" << endl;
+                cout << "Congrats on having the patience to win all the cards!" << endl << endl;
+            }
         }
         else
         {
-            cout << "You won!! :) *MIDDLE FINGER*" << endl;
+            c = 1;
+            for (int i = 0; i < numrounds; i++)
+            {
+                cout << "Round " << c << endl << endl;
+                PlayRound();
+            }
+
+            // win / lose case
+
+            if (p->getDeck()->getLength() + p->getSideDeck()->getLength() <= cpu->getDeck()->getLength())
+            {
+                cout << "You lost the game!!" << endl;
+                cout << "The computer had " << cpu->getDeck()->getLength() << " cards." << endl;
+                cout << "You had " << p->getDeck()->getLength() + p->getSideDeck()->getLength() << " cards." << endl << endl;
+            }
+            else
+            {
+                cout << "You won the game!!" << endl << endl;
+                cout << "The computer had " << cpu->getDeck()->getLength() << " cards." << endl;
+                cout << "You had " << p->getDeck()->getLength() + p->getSideDeck()->getLength() << " cards." << endl << endl;
+            }
         }
 
         // empty both decks
 
         cout << "Play again(Y/N)" << endl;
         cin >> ans;
+        cout << endl;
     }
 
     delete p;
