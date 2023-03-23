@@ -268,6 +268,18 @@ void BST<T>::EmptyTree() // theoretically works by relying on a cascading destru
     delete root;
 }
 
+template <class T>
+void BST<T>::InOrder(Node<T> *troot) // function to traverse tree and insert nodes in least to greatest order in the vect member
+{
+    if (troot == null)
+    {
+        return;
+    }
+    InOrder(troot->left);
+    vect.push_back(troot->data);
+    InOrder(troot->right);
+}
+
 // Methods for Rotation
 
 template <class T>
@@ -280,8 +292,16 @@ int BST<T>::Height(Node<T> *current)
     int L = height(current->left);
     int R = height(current->right);
 
-    // logic to figure out when depth on right and left differ by more than 2
-    // make calls to balance the tree
+    if (L-R >= 2){
+        // left rotate balance
+        L--;
+        R++;
+    }
+    else if(L-R <= -2){
+        // right rotate balance
+        L++;
+        R--;
+    }
 
     if (L > R)
     {
@@ -314,48 +334,52 @@ void BST<T>::RotateLeft(Node<T> *parent, Node<T> *pivot) // written in class, sh
 template <class T>
 void BST<T>::RotateRight(Node<T> *parent, Node<T> *pivot) // inverse of what was written in class
 {
-}
-
-template <class T>
-void BST<T>::Flatten(Node<T> &troot)
-{
-    // base condition- return if root is nullptr or if it is a
-    // leaf node
-    if (troot == nullptr || troot->left == nullptr && troot->right == nullptr)
-        return;
-
-    // if root->left exists then we have to make it
-    // root->right
-    if (troot->left != nullptr)
-    {
-        // move left recursively
-        flatten(troot->left);
-        // store the node root->right
-        Node<T> *tmpRight = troot->right;
-        troot->right = troot->left;
-        delete troot->left;
-        troot->left = nullptr;
-
-        // find the position to insert the stored value
-        Node<T> *NInsert = troot->right;
-        while (NInsert->right != nullptr)
-            NInsert = NInsert->right;
-
-        // insert the stored value
-        NInsert->right = tmpRight;
+    if (pivot == root)
+    { // if pivot is the root
+      // figure it out
     }
-    // now call the same function for root->right
-    flatten(troot->right);
+    else if (parent->left == pivot)
+    { // if pivot is the left child of the parent
+        parent->left = pivot->left;
+        pivot->left = pivot->left->right;
+        parent->left->right = pivot;
+    }
+    else
+    { // if pivot is the right child of the parent
+        parent->right = pivot->right;
+        pivot->right = pivot->right->left;
+        parent->right->left = pivot;
+    }
 }
 
-template <class T>
-void BST<T>::InOrder(Node<T> *troot) // function to traverse tree and insert nodes in least to greatest order in the vect member
-{
-    if (troot == null)
-    {
-        return;
-    }
-    InOrder(troot->left);
-    vect.push_back(troot->data);
-    InOrder(troot->right);
-}
+// template <class T>
+// void BST<T>::Flatten(Node<T> &troot)
+// {
+//     // base condition- return if root is nullptr or if it is a
+//     // leaf node
+//     if (troot == nullptr || troot->left == nullptr && troot->right == nullptr)
+//         return;
+
+//     // if root->left exists then we have to make it
+//     // root->right
+//     if (troot->left != nullptr)
+//     {
+//         // move left recursively
+//         flatten(troot->left);
+//         // store the node root->right
+//         Node<T> *tmpRight = troot->right;
+//         troot->right = troot->left;
+//         delete troot->left;
+//         troot->left = nullptr;
+
+//         // find the position to insert the stored value
+//         Node<T> *NInsert = troot->right;
+//         while (NInsert->right != nullptr)
+//             NInsert = NInsert->right;
+
+//         // insert the stored value
+//         NInsert->right = tmpRight;
+//     }
+//     // now call the same function for root->right
+//     flatten(troot->right);
+// }

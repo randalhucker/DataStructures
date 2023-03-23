@@ -39,7 +39,7 @@ public:
     vector<T> GetAllDescending();
     void EmptyTree();
     void Print(Node<T> *temp); // Finished
-    void Flatten(Node<T> &troot);
+    // void Flatten(Node<T> &troot);
     void InOrder(Node<T> *troot);
 
     // Methods for Balancing
