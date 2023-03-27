@@ -19,7 +19,8 @@ BST<T>::~BST()
 }
 
 template <class T>
-bool BST<T>::isEmpty() {
+bool BST<T>::isEmpty()
+{
     if (this->size == 0)
     {
         return true;
@@ -30,7 +31,7 @@ bool BST<T>::isEmpty() {
 template <class T>
 Node<T> *BST<T>::getRoot()
 {
-    return(root);
+    return (root);
 }
 
 template <class T>
@@ -84,7 +85,7 @@ T *BST<T>::Find(T key) // returns pointer to data of the node (could be edited t
         throw EmptyTreeException();
     }
     Node<T> *temp = root;
-    T* retval;
+    T *retval;
     while (true)
     {
         if (temp == nullptr)
@@ -119,8 +120,8 @@ T BST<T>::Remove(T key)
         throw ItemNotFoundException();
     }
 
-    Node<T>* temp = root;
-    Node<T>* to_delete = nullptr;
+    Node<T> *temp = root;
+    Node<T> *to_delete = nullptr;
     T retval;
 
     if (root->data == key) // root case
@@ -145,14 +146,14 @@ T BST<T>::Remove(T key)
             EmptyTree();
         }
 
-        // call balancing methods
+        Height(root, nullptr);
 
         size--;
         return (retval);
     }
 
     // Other cases
-    
+
     // While loop to find the parent of the Node<T> we wish to remove
     while ((temp->left != nullptr && temp->left->data != key) || (temp->right != nullptr && temp->right->data != key))
     {
@@ -212,13 +213,13 @@ T BST<T>::Remove(T key)
     }
     else // Right child is the target
     {
-        if(temp->right->left == nullptr && temp->right->right == nullptr) // leaf case
+        if (temp->right->left == nullptr && temp->right->right == nullptr) // leaf case
         {
             retval = temp->right->data;
             delete temp->right;
             temp->right = nullptr;
         }
-        else if(temp->right->left != nullptr && temp->right->right != nullptr) // two children case
+        else if (temp->right->left != nullptr && temp->right->right != nullptr) // two children case
         {
             to_delete = temp->right;
             T replaceval = FindSmallestLarger(to_delete->right);
@@ -251,7 +252,7 @@ T BST<T>::Remove(T key)
 
     size--;
 
-    // call balancing methods
+    Height(root, nullptr);
 
     return retval;
 }
@@ -303,7 +304,6 @@ void BST<T>::Print(Node<T> *toprint) // method was written in class (might work 
     Print(toprint->right);
 }
 
-
 template <class T>
 void BST<T>::PrintVect(vector<T> vects)
 {
@@ -314,7 +314,7 @@ void BST<T>::PrintVect(vector<T> vects)
 }
 
 template <class T>
-int BST<T>::getSize() 
+int BST<T>::getSize()
 {
     return (size);
 }
@@ -367,31 +367,51 @@ int BST<T>::Height(Node<T> *current, Node<T> *parent)
     int L = Height(current->left, current);
     int R = Height(current->right, current);
 
-    // logic to know when to rotate
-    if (L-R >= 2){
-        RotateRight(parent, current);
-        L--;
-        R++;
-    }
-    else if(L-R <= -2){
-        RotateLeft(parent, current);
-        L++;
-        R--;
-    }
-
-    // more base cases
-    if (L > R)
+    // TODO - logic to know when to rotate
+    if (L - R >= 2)
     {
-        return L + 1;
+        if (Height(current->left, current) > Height(current->right, current))
+        {
+            RotateRight(parent, current);
+            L--;
+            R++;
+        }
+        else
+        {
+            RotateLeftRight(parent, current);
+            L++ R--;
+        }
     }
-    return R + 1;
+    else if (L - R <= -2)
+    {
+        if (Height(current->left, current) < Height(current->right, current))
+        {
+            RotateLeft(parent, current);
+            L++;
+            R--;
+        }
+        else
+        {
+            RotateRightLeft(parent, current);
+            L--;
+            R++;
+        }
+    }
+}
+
+// more base cases
+if (L > R)
+{
+    return L + 1;
+}
+return R + 1;
 }
 
 template <class T>
 void BST<T>::RotateLeft(Node<T> *parent, Node<T> *pivot) // written in class, should work
 {
     if (pivot == root)
-    { 
+    {
         root = pivot->right;
         root->left = pivot;
         pivot->right = nullptr;
@@ -414,7 +434,7 @@ template <class T>
 void BST<T>::RotateRight(Node<T> *parent, Node<T> *pivot) // inverse of what was written in class
 {
     if (pivot == root)
-    { 
+    {
         root = pivot->left;
         root->right = pivot;
         pivot->left = nullptr;
@@ -466,7 +486,6 @@ void BST<T>::RotateRightLeft(Node<T> *parent, Node<T> *pivot)
     }
 }
 
-
 template <class T>
 void BST<T>::RotateLeftRight(Node<T> *parent, Node<T> *pivot)
 {
@@ -499,9 +518,6 @@ void BST<T>::RotateLeftRight(Node<T> *parent, Node<T> *pivot)
         parent->right->right = pivot;
     }
 }
-
-
-
 
 // template <class T>
 // void BST<T>::Flatten(Node<T> &troot)
