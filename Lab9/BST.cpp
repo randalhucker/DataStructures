@@ -19,6 +19,21 @@ BST<T>::~BST()
 }
 
 template <class T>
+bool BST<T>::isEmpty() {
+    if (this->size == 0)
+    {
+        return true;
+    }
+    return false;
+}
+
+template <class T>
+Node<T> *BST<T>::getRoot()
+{
+    return(root);
+}
+
+template <class T>
 void BST<T>::Insert(T inVal)
 {
     if (root == nullptr)
@@ -62,13 +77,14 @@ void BST<T>::Insert(T inVal)
 }
 
 template <class T>
-T *BST<T>::Find(T key) // DONE
+T *BST<T>::Find(T key) // returns pointer to data of the node (could be edited to return entire node if needed
 {
-    if (size = 0)
+    if (size == 0)
     {
         throw EmptyTreeException();
     }
     Node<T> *temp = root;
+    T* retval;
     while (true)
     {
         if (temp == nullptr)
@@ -77,21 +93,22 @@ T *BST<T>::Find(T key) // DONE
         }
         if (temp->data == key)
         { // found case
-            return temp;
+            retval = new T(temp->data);
+            return retval;
         }
         if (temp->data > key)
         { // move right case
-            temp = temp->right;
+            temp = temp->left;
         }
         else
         { // move left case
-            temp = temp->left;
+            temp = temp->right;
         }
     }
 }
 
 template <class T>
-T Remove(T key)
+T BST<T>::Remove(T key)
 {
     if (isEmpty()) // empty tree case
     {
@@ -101,17 +118,41 @@ T Remove(T key)
     {
         throw ItemNotFoundException();
     }
-    if (root->data == key) // root case
-    {
-        // probably replace with right or left child
-    }
 
-    // Other Cases
-
-    Node<T> *temp = root;
-    Node<T> *to_delete = nullptr;
+    Node<T>* temp = root;
+    Node<T>* to_delete = nullptr;
     T retval;
 
+    if (root->data == key) // root case
+    {
+        retval = root->data;
+        if (root->right != nullptr) // right child exists
+        {
+            T replaceval = FindSmallestLarger(root->right);
+            T removeval = Remove(replaceval);
+            size++;
+            root->data = removeval;
+        }
+        else if (root->left != nullptr) // left child exists
+        {
+            T replaceval = FindLargestSmaller(root->left);
+            T removeval = Remove(replaceval);
+            size++;
+            root->data = removeval;
+        }
+        else // no children
+        {
+            EmptyTree();
+        }
+
+        // call balancing methods
+
+        size--;
+        return (retval);
+    }
+
+    // Other cases
+    
     // While loop to find the parent of the Node<T> we wish to remove
     while ((temp->left != nullptr && temp->left->data != key) || (temp->right != nullptr && temp->right->data != key))
     {
@@ -131,69 +172,78 @@ T Remove(T key)
 
     // Figure out how many children our target Node<T> has and run appropriate remove procedure
 
-    if (temp->left == nullptr && temp->right == nullptr) // LEAF CASE
+    if (temp->left != nullptr && temp->left->data == key) // Left child is the target
     {
-        if (temp->left != nullptr && temp->left->data == key) // left child is the target
+        if (temp->left->left == nullptr && temp->left->right == nullptr) // leaf case
         {
             retval = temp->left->data;
             delete temp->left;
             temp->left = nullptr;
         }
-        else // right child is the target
-        {
-            retval = temp->right->data;
-            delete temp->right;
-            temp->right = nullptr;
-        }
-    }
-    else if (temp->left != nullptr && temp->right != nullptr) // 2 CHILDREN CASE
-    {
-        // set to_delete
-        if (temp->left != nullptr && temp->left->data == key) // left child is the target
+        else if (temp->left->left != nullptr && temp->left->right != nullptr) // two children case
         {
             to_delete = temp->left;
+            T replaceval = FindSmallestLarger(to_delete->right);
+            T removeval = Remove(replaceval); // will always be a leaf, so recursive remove call should return pretty quickly
+            size++;
+            retval = to_delete->data;
+            to_delete->data = removeval;
         }
-        else // right child is the target
-        {
-            to_delete = temp->right;
-        }
-
-        T replaceval = FindSmallestLarger(to_delete->right);
-        T removeval = Remove(replaceval); // will always be a leaf, so recursive remove call should return pretty quickly
-        retval = to_delete->data;
-        to_delete->data = removeval;
-    }
-    else // 1 CHILD CASE
-    {
-        if (key < temp->data) // left child is the target
+        else // one child case
         {
             to_delete = temp->left;
             if ((to_delete)->left != nullptr) // to_delete has left child
             {
                 temp->left = to_delete->left;
                 retval = to_delete->data;
+                to_delete->left = nullptr;
+                to_delete->right = nullptr;
                 delete to_delete;
             }
             else // to_delete has right child
             {
                 temp->left = to_delete->right;
                 retval = to_delete->data;
+                to_delete->left = nullptr;
+                to_delete->right = nullptr;
                 delete to_delete;
             }
         }
-        else // right child is the target
+    }
+    else // Right child is the target
+    {
+        if(temp->right->left == nullptr && temp->right->right == nullptr) // leaf case
+        {
+            retval = temp->right->data;
+            delete temp->right;
+            temp->right = nullptr;
+        }
+        else if(temp->right->left != nullptr && temp->right->right != nullptr) // two children case
+        {
+            to_delete = temp->right;
+            T replaceval = FindSmallestLarger(to_delete->right);
+            T removeval = Remove(replaceval); // will always be a leaf, so recursive remove call should return pretty quickly
+            size++;
+            retval = to_delete->data;
+            to_delete->data = removeval;
+        }
+        else // one child case
         {
             to_delete = temp->right;
             if ((to_delete)->left != nullptr)
             { // to_delete has left child
                 temp->left = to_delete->left;
                 retval = to_delete->data;
+                to_delete->left = nullptr;
+                to_delete->right = nullptr;
                 delete to_delete;
             }
             else
             { // to_delete has right child
                 temp->left = to_delete->right;
                 retval = to_delete->data;
+                to_delete->left = nullptr;
+                to_delete->right = nullptr;
                 delete to_delete;
             }
         }
@@ -217,15 +267,25 @@ T BST<T>::FindSmallestLarger(Node<T> *temp)
 }
 
 template <class T>
+T BST<T>::FindLargestSmaller(Node<T> *temp)
+{
+    while (temp->right != nullptr)
+    {
+        temp = temp->right;
+    }
+    return temp->data;
+}
+
+template <class T>
 void BST<T>::Print(Node<T> *toprint) // method was written in class (might work but is not necessary for lab)
 {
-    if (toprint == nullptrptr)
+    if (toprint == nullptr)
     {
         return;
     }
 
     cout << toprint->data << " (";
-    if (toprint->left != nullptrptr)
+    if (toprint->left != nullptr)
     {
         cout << toprint->left->data;
     }
@@ -234,13 +294,27 @@ void BST<T>::Print(Node<T> *toprint) // method was written in class (might work 
     {
         cout << toprint->right->data;
         cout << " )" << endl;
-        print(toprint->left);
+        Print(toprint->left);
     }
-    print(toprint->right);
+    else
+    {
+        cout << " )" << endl;
+    }
+    Print(toprint->right);
+}
+
+
+template <class T>
+void BST<T>::PrintVect(vector<T> vects)
+{
+    for (int i = 0; i < vects.size(); i++)
+    {
+        cout << vects.at(i) << " ";
+    }
 }
 
 template <class T>
-int BST<T>::getSize() // Done
+int BST<T>::getSize() 
 {
     return (size);
 }
@@ -271,7 +345,7 @@ void BST<T>::EmptyTree() // theoretically works by relying on a cascading destru
 template <class T>
 void BST<T>::InOrder(Node<T> *troot) // function to traverse tree and insert nodes in least to greatest order in the vect member
 {
-    if (troot == null)
+    if (troot == nullptr)
     {
         return;
     }
@@ -283,26 +357,29 @@ void BST<T>::InOrder(Node<T> *troot) // function to traverse tree and insert nod
 // Methods for Rotation
 
 template <class T>
-int BST<T>::Height(Node<T> *current)
+int BST<T>::Height(Node<T> *current, Node<T> *parent)
 {
-    if (current = nullptr)
+    // base case
+    if (current == nullptr)
     {
         return 0;
     }
-    int L = height(current->left);
-    int R = height(current->right);
+    int L = Height(current->left, current);
+    int R = Height(current->right, current);
 
+    // logic to know when to rotate
     if (L-R >= 2){
-        // left rotate balance
+        RotateRight(parent, current);
         L--;
         R++;
     }
     else if(L-R <= -2){
-        // right rotate balance
+        RotateLeft(parent, current);
         L++;
         R--;
     }
 
+    // more base cases
     if (L > R)
     {
         return L + 1;
@@ -314,8 +391,10 @@ template <class T>
 void BST<T>::RotateLeft(Node<T> *parent, Node<T> *pivot) // written in class, should work
 {
     if (pivot == root)
-    { // if pivot is the root
-      // figure it out
+    { 
+        root = pivot->right;
+        root->left = pivot;
+        pivot->right = nullptr;
     }
     else if (parent->left == pivot)
     { // if pivot is the left child of the parent
@@ -335,8 +414,10 @@ template <class T>
 void BST<T>::RotateRight(Node<T> *parent, Node<T> *pivot) // inverse of what was written in class
 {
     if (pivot == root)
-    { // if pivot is the root
-      // figure it out
+    { 
+        root = pivot->left;
+        root->right = pivot;
+        pivot->left = nullptr;
     }
     else if (parent->left == pivot)
     { // if pivot is the left child of the parent
@@ -346,11 +427,69 @@ void BST<T>::RotateRight(Node<T> *parent, Node<T> *pivot) // inverse of what was
     }
     else
     { // if pivot is the right child of the parent
-        parent->right = pivot->right;
-        pivot->right = pivot->right->left;
+        parent->right = pivot->left;
+        pivot->left = pivot->left->right;
+        parent->right->right = pivot;
+    }
+}
+
+template <class T>
+void BST<T>::RotateRightLeft(Node<T> *parent, Node<T> *pivot)
+{
+    if (pivot == root) // NOT DONE IN CLASS
+    {
+        root = pivot->right->left;
+        pivot->right->left = root->right;
+        root->right = pivot->right;
+        pivot->right = root->left;
+        root->left = pivot;
+    }
+    else if (pivot == parent->left) // pivot is left child of parent (in class)
+    {
+        parent->left = pivot->right->left; // start of case where pivot is the left of parent
+        pivot->right->left = parent->left->right;
+
+        parent->left->right = pivot->right;
+        pivot->right = parent->left->left;
+
+        parent->left->left = pivot;
+    }
+    else // pivot is right child of parent
+    {
+        parent->right = pivot->right->left; // start of case where pivot is the left of parent
+        pivot->right->left = parent->right->right;
+
+        parent->right->right = pivot->right;
+        pivot->right = parent->right->left;
+
         parent->right->left = pivot;
     }
 }
+
+
+template <class T>
+void BST<T>::RotateLeftRight(Node<T> *parent, Node<T> *pivot)
+{
+    if (pivot == root) // pivot is root (in class)
+    {
+        root = pivot->left->right;
+        pivot->left->right = root->left;
+        root->left = pivot->left;
+        pivot->left = root->right;
+        root->right = pivot;
+    }
+    else if (pivot == parent->left) // pivot is left child of parent
+    {
+
+    }
+    else // pivot is right child of parent
+    {
+
+    }
+}
+
+
+
 
 // template <class T>
 // void BST<T>::Flatten(Node<T> &troot)
