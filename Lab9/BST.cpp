@@ -397,14 +397,13 @@ int BST<T>::Height(Node<T> *current, Node<T> *parent)
             R++;
         }
     }
-}
 
-// more base cases
-if (L > R)
-{
-    return L + 1;
-}
-return R + 1;
+    // more base cases
+    if (L > R)
+    {
+        return L + 1;
+    }
+    return R + 1;
 }
 
 template <class T>
