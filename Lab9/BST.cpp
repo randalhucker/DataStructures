@@ -456,7 +456,7 @@ void BST<T>::RotateRightLeft(Node<T> *parent, Node<T> *pivot)
     }
     else // pivot is right child of parent
     {
-        parent->right = pivot->right->left; // start of case where pivot is the left of parent
+        parent->right = pivot->right->left; // start of case where pivot is the right of parent
         pivot->right->left = parent->right->right;
 
         parent->right->right = pivot->right;
@@ -480,11 +480,23 @@ void BST<T>::RotateLeftRight(Node<T> *parent, Node<T> *pivot)
     }
     else if (pivot == parent->left) // pivot is left child of parent
     {
+        parent->left = pivot->left->right; // start of case where pivot is the left of parent
+        pivot->left->right = parent->left->right;
 
+        parent->left->left = pivot->left;
+        pivot->left = parent->left->right;
+
+        parent->left->right = pivot;
     }
     else // pivot is right child of parent
     {
+        parent->right = pivot->left->right; // start of case where pivot is the right of parent
+        pivot->left->right = parent->right->left;
 
+        parent->right->left = pivot->left;
+        pivot->left = parent->right->right;
+
+        parent->right->right = pivot;
     }
 }
 
