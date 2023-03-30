@@ -100,10 +100,6 @@ void body_function() // created to make main() more efficient and readable
         }
         else
         {
-            if (tempWord.getWord() == "me")
-            {
-                int x = 1;
-            }
             WordLocation->setFreq(WordLocation->getFreq() + 1);
         }
     }
