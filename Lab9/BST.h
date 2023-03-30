@@ -2,8 +2,10 @@
 #ifndef _BST_
 #define _BST_
 #include <string>
-#include "Node.h"
 #include <vector>
+#include "Node.h"
+#include "Node.cpp"
+#include "TreeExceptions.h"
 
 using namespace std;
 
@@ -32,20 +34,28 @@ public:
 
     // helper for remove
     T FindSmallestLarger(Node<T> *temp);
+    T FindLargestSmaller(Node<T>* temp);
 
     int getSize(); // Finished
 
     vector<T> GetAllAscending();
     vector<T> GetAllDescending();
     void EmptyTree();
-    void Print(Node<T> *temp); // Finished
-    void Flatten(Node<T> &troot);
+    void Print(Node<T> *temp); 
+    void PrintVect(vector<T> vect);
+
+    // void Flatten(Node<T> &troot);
     void InOrder(Node<T> *troot);
 
     // Methods for Balancing
-    int Height(Node<T> *current);
+    int Height(Node<T> *current, Node<T> *parent);
     void RotateLeft(Node<T> *parent, Node<T> *pivot);
     void RotateRight(Node<T> *parent, Node<T> *pivot);
+    void RotateLeftRight(Node<T>* parent, Node<T>* pivot);
+    void RotateRightLeft(Node<T>* parent, Node<T>* pivot);
+
+    bool isEmpty();
+    Node<T>* getRoot();
 };
 
 #endif

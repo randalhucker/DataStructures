@@ -11,7 +11,7 @@ Node<T>::Node()
 }
 
 template <class T>
-Node<T>::Node(T *inval)
+Node<T>::Node(T inval)
 {
     data = inval; // remember to delete in destructor
     right = nullptr;
@@ -26,7 +26,7 @@ Node<T>::~Node()
 }
 
 template <class T>
-void Node<T>::setData(T *inval)
+void Node<T>::setData(T inval)
 {
     data = inval;
 }

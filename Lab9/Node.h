@@ -15,10 +15,10 @@ public:
     Node *right; // holds pointer to leftious node in the list
 
     // Constructor (Takes an invalue of type 'T')
-    Node(T *inval);
+    Node(T inval);
     Node(); // default constructor
     ~Node();
-    void setData(T *inval);
+    void setData(T inval);
     void setRight(T *n);
     void setLeft(T *n);
 
