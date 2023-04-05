@@ -55,7 +55,7 @@ Part *createPart()
     return (new Part(D, U, S, P, L, Q));
 }
 
-Part *FindPart()
+Part *FindPart() // finds part in list of parts the user has already added (prevents the user needing to input an entire part)
 {
     int sku = 0;
     cout << "Enter the SKU number of the part you'd like to retrieve / locate. This must be a part you have already created." << endl;
