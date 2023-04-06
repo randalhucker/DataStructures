@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _HT_
-#define _HT_
+#ifndef _LHT_
+#define _LHT_
 #include <string>
 #include <vector>
 
@@ -10,15 +10,15 @@ template <class T>
 class HashTable
 {
 
-private:
+protected:
     int MAX_SIZE = 100;
-    T **arr = new T*[MAX_SIZE];
-    bool *deleted = new bool[MAX_SIZE]; // initialize to false
+    T **arr;
+    bool *deleted; // initialize to false
     int numItems = 0;
+    int comparisons = 0;
 
 public:
-    HashTable();
-    HashTable(int s);
+    HashTable(int s = 100);
     ~HashTable();
     int Hash(string s);
     void AddItem(T *inval);
@@ -27,6 +27,7 @@ public:
     T *GetItem(T *key);
     int GetLength();
     bool isEmpty();
+    int getComps();
 };
 
 #endif

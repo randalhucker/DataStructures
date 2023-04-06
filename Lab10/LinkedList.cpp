@@ -148,6 +148,7 @@ T *LinkedList<T>::GetItem(T *item)
 
     while ((*temp->data) != (*item))
     {
+        comparisons++;
         temp = temp->next;
     }
     return (temp->data);

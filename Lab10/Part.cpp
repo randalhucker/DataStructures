@@ -80,6 +80,7 @@ int Part::rdn(int y, int m, int d)
     return x;
 }
 
+/*
 bool Part::Availaible(string d)
 {
     if (QOH > 0)
@@ -110,6 +111,7 @@ bool Part::Availaible(string d)
 
     return false;
 }
+*/
 
 bool Part::operator>(Part &P)
 {

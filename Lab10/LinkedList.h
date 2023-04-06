@@ -11,6 +11,7 @@ template <class T>
 class LinkedList
 {
 public:
+    static int comparisons; // static variable to hold number of comparisons for all linked lists in the LinkedTable (reset after each run in test function)
     Node<T>* head;
     int length = 0;
     Node<T>* current;
@@ -41,3 +42,7 @@ public:
 };
 
 #endif
+
+// initialize static member
+template <typename T>
+int LinkedList<T>::comparisons = 0;

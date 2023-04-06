@@ -4,31 +4,27 @@
 #include <iostream>
 #include <algorithm>
 
-template <class T>
-LinkedTable<T>::LinkedTable()
-{
-    MAX_SIZE = 100;
-
-    for (int i = 0; i < MAX_SIZE; i++)
-    {
-        arr[i]->head = nullptr;
-    }
-}
 
 template <class T>
-LinkedTable<T>::LinkedTable(int s)
+LinkedTable<T>::LinkedTable(int s) : HashTable<T>(s)
 {
     MAX_SIZE = s;
-
-    for (int i = 0; i < MAX_SIZE; i++)
+    arr = new LinkedList<T>*[s];
+    for (int i = 0; i < s; i++)
     {
-        arr[i] = nullptr;
+        arr[i] = new LinkedList<T>();
+        arr[i]->head = nullptr;
     }
 }
 
 template <class T>
 LinkedTable<T>::~LinkedTable()
 {
+    LinkedList<T>::comparisons = 0;
+    for (int i = 0; i < MAX_SIZE; i++)
+    {
+        delete arr[i];
+    }
 }
 
 // The sum of all the ASCII values for the passed in string and modulus by the maximum size of the table
@@ -71,6 +67,7 @@ T *LinkedTable<T>::GetItem(T *key)
         throw ItemNotFoundException();
     }
 
+    arr[index]->comparisons++;
     return arr[index]->GetItem(key);
 }
 
@@ -86,8 +83,8 @@ T *LinkedTable<T>::RemoveItem(T *key) // changes
     {
         throw ItemNotFoundException();
     }
-    return arr[index]->Remove(key);
     numItems--;
+    return arr[index]->Remove(key);
 }
 
 template <class T>
@@ -104,4 +101,16 @@ bool LinkedTable<T>::isEmpty()
         return true;
     }
     return false;
+}
+
+template<class T>
+int LinkedTable<T>::getComps()
+{
+    return(LinkedList<T>::comparisons);
+}
+
+template<class T>
+void LinkedTable<T>::ResetComps()
+{
+    LinkedList<T>::comparisons = 0;
 }

@@ -3,25 +3,22 @@
 #define _HT_
 #include <string>
 #include <vector>
-#include "LinkedList.h"
-#include "LinkedList.cpp"
 #include "HashTable.h"
 #include "HashTable.cpp"
 
 using namespace std;
 
 template <class T>
-class LinkedTable : protected HashTable<T>
+class LinkedTable : public HashTable<T>
 {
 
 protected:
     int MAX_SIZE;
-    LinkedList<T> **arr = new LinkedList<T>*[MAX_SIZE];
+    LinkedList<T> **arr;
     int numItems = 0;
 
 public:
-    LinkedTable();
-    LinkedTable(int s);
+    LinkedTable(int s = 100);
     ~LinkedTable();
     int Hash(string s);
     void AddItem(T *inval);
@@ -29,6 +26,8 @@ public:
     T *GetItem(T *key);
     int GetLength();
     bool isEmpty();
+    int getComps();
+    void ResetComps();
 };
 
 #endif

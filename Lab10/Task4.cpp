@@ -1,3 +1,14 @@
+/*
+
+// TASK 4 TESTING PROGRAM:
+
+// This .cpp file contains the testing for task 4. Out of the three testing files in this project
+// (Task3.cpp, Task4.cpp, Task5.cpp), two must be commented out at all times. To uncomment or comment out the
+// the entire file, you need only remove or add the top block comment character.
+
+
+
+#pragma once
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -8,6 +19,7 @@
 using namespace std;
 
 vector<Part *> vect;
+vector<int> part_vector;
 
 void showMenu()
 {
@@ -74,6 +86,7 @@ Part *FindPart() // finds part in list of parts the user has already added (prev
 
 int main()
 {
+    
     int ans = 1;
     int MenuAns = 0;
 
@@ -152,3 +165,5 @@ int main()
 
     return 0;
 }
+
+// */

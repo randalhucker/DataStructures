@@ -1,3 +1,13 @@
+/*
+
+// TASK 3 TESTING PROGRAM:
+
+// This .cpp file contains the testing for task 3. Out of the three testing files in this project
+// (Task3.cpp, Task4.cpp, Task5.cpp), two must be commented out at all times.To uncomment or comment out the
+// the entire file, you need only remove or add the top block comment character.
+
+
+
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -152,3 +162,5 @@ int main()
 
     return 0;
 }
+
+// */

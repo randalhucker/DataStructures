@@ -1,28 +1,19 @@
 #pragma once
 #include "HashTable.h"
+#include "LinkedList.h"
+#include "LinkedList.cpp"
 #include "HashExceptions.h"
 #include <iomanip>
 #include <iostream>
 #include <algorithm>
 
 template <class T>
-HashTable<T>::HashTable()
-{
-    MAX_SIZE = 100;
-
-    for (int i = 0; i < MAX_SIZE; i++)
-    {
-        arr[i] = nullptr;
-        deleted[i] = false;
-    }
-}
-
-template <class T>
 HashTable<T>::HashTable(int s)
 {
     MAX_SIZE = s;
-
-    for (int i = 0; i < MAX_SIZE; i++)
+    arr = new T*[s];
+    deleted = new bool[s];
+    for (int i = 0; i < s; i++)
     {
         arr[i] = nullptr;
         deleted[i] = false;
@@ -98,6 +89,7 @@ T *HashTable<T>::GetItem(T *key)
     while ((arr[index] != nullptr && arr[index] != key) || (deleted[index] == true))
     {
         index = (index + 1) % MAX_SIZE;
+        comparisons++;
     }
     if (arr[index] == nullptr)
     {
@@ -145,36 +137,7 @@ bool HashTable<T>::isEmpty()
     return false;
 }
 
-// can use insert, remove, and find from LinkedList (and everything else)
-// LL = LinkedList
-
-/* class LinkedHashTable {
-    LL *arr[MAX_SIZE];
-    int numItems = 0;
-    int Hash(int x);
-
-void Inset (int inval) {
-    int index = Hash(inval);
-    if (arr[index] == nullptr) {
-        arr[index] new LL;
-    }
-    arr[index]->Insert(inval);
-    numItems++;
+template <class T>
+int HashTable<T>::getComps() {
+    return(comparisons);
 }
-
-void Find (int key) {
-    int index = Hash(key);
-    if (arr[index] == nullptr) {
-        throw ItemNotFoundException();
-    }
-    return arr[index]->Find(key);
-}
-
-// int Remove (int key) {
-//     int index = Hash(key);
-//     if (arr[index] == nullptr) {
-//         throw ItemNotFoundException();
-//     }
-//     return arr[index]->Remove(key);
-//     numItems--;
-// } */
