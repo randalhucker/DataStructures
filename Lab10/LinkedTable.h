@@ -13,9 +13,7 @@ class LinkedTable : public HashTable<T>
 {
 
 protected:
-    int MAX_SIZE;
     LinkedList<T> **arr;
-    int numItems = 0;
 
 public:
     LinkedTable(int s = 100);
