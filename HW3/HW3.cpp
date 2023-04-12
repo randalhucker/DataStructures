@@ -79,7 +79,7 @@ void PlayRound()
     cout << endl;
 
     Card* PlayerCard;
-    Card* PlayerCard1;
+    Card* PlayerSideCard; // SideDeck
     Card* CpuCard;
     switch (stoi(ans))
     {
@@ -152,24 +152,24 @@ void PlayRound()
         }
 
         PlayerCard = p->getDeck()->Dequeue();
-        PlayerCard1 = p->getSideDeck()->Pop();
+        PlayerSideCard = p->getSideDeck()->Pop();
         CpuCard = cpu->getDeck()->Dequeue();
 
-        cout << "Your cards are the " << to_string(PlayerCard->getData()) << " of " << PlayerCard->getSuit() << ", and the " << to_string(PlayerCard1->getData()) << " of " << PlayerCard1->getSuit() << "." << endl;
+        cout << "Your cards are the " << to_string(PlayerCard->getData()) << " of " << PlayerCard->getSuit() << ", and the " << to_string(PlayerSideCard->getData()) << " of " << PlayerSideCard->getSuit() << "." << endl;
         cout << "The CPU's card is the " << to_string(CpuCard->getData()) << " of " << CpuCard->getSuit() << "." << endl;
 
-        if ((PlayerCard->getData() + PlayerCard1->getData()) > CpuCard->getData())
+        if ((PlayerCard->getData() + PlayerSideCard->getData()) > CpuCard->getData())
         {
             cout << endl << "You won this round!" << endl;
             p->getDeck()->Enqueue(PlayerCard);
-            p->getDeck()->Enqueue(PlayerCard1);
+            p->getDeck()->Enqueue(PlayerSideCard);
             p->getDeck()->Enqueue(CpuCard);
         }
         else
         {
             cout << endl << "You lost this round!" << endl;
             cpu->getDeck()->Enqueue(PlayerCard);
-            cpu->getDeck()->Enqueue(PlayerCard1);
+            cpu->getDeck()->Enqueue(PlayerSideCard);
             cpu->getDeck()->Enqueue(CpuCard);
         }
         c++;
