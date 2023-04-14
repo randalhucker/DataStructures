@@ -4,12 +4,11 @@
 #include <iostream>
 #include <algorithm>
 
-
 template <class T>
 LinkedTable<T>::LinkedTable(int s) : HashTable<T>(s)
 {
     MAX_SIZE = s;
-    arr = new LinkedList<T>*[s];
+    arr = new LinkedList<T> *[s];
     for (int i = 0; i < s; i++)
     {
         arr[i] = new LinkedList<T>();
@@ -103,13 +102,13 @@ bool LinkedTable<T>::isEmpty()
     return false;
 }
 
-template<class T>
+template <class T>
 int LinkedTable<T>::getComps()
 {
-    return(LinkedList<T>::comparisons);
+    return (LinkedList<T>::comparisons);
 }
 
-template<class T>
+template <class T>
 void LinkedTable<T>::ResetComps()
 {
     LinkedList<T>::comparisons = 0;
