@@ -155,5 +155,38 @@ int main()
 			break;
 		}
 	}
+
+	cout << "Quick Sort:" << endl;
+	for (int i = 0; i < 1; i++)
+	{
+		cout << "Array " << i + 1 << ": ";
+		switch (i)
+		{
+		case 0:
+			cout << endl;
+			PrintArray(arr1, 10);
+			TimeTaken(arr1, 10, 3);
+			PrintArray(arr1, 10);
+			break;
+		case 1:
+			TimeTaken(arr2, 100, 3);
+			break;
+		case 2:
+			TimeTaken(arr3, 500, 3);
+			break;
+		case 3:
+			TimeTaken(arr4, 5000, 3);
+			break;
+		case 4:
+			TimeTaken(arr5, 25000, 3);
+			break;
+		case 5:
+			TimeTaken(arr6, 100000, 3);
+			break;
+		default:
+			cout << "Invalid Array" << endl;
+			break;
+		}
+	}
 	return 0;
 }
