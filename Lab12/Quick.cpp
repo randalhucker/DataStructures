@@ -1,44 +1,37 @@
 #include "Quick.h"
 
-void QuickSort(int* arr, int n)
+void swap(int *arr, int i, int j) // utility function to swap two elements
 {
-	int pivot = 0;
-	if (arr[0] < arr[n - 1] && arr[0] > arr[n / 2])
-	{
-		pivot = arr[0];
-	}
-	else if (arr[n / 2] < arr[0] && arr[n / 2] > arr[n-1])
-	{
-		pivot = arr[n/2];
-	}
-	else
-	{
-		pivot = arr[n - 1];
-	}
-
-	partition(arr, pivot);
+    int temp = arr[i];
+    arr[i] = arr[j]; // swap arr[i] and arr[j]
+    arr[j] = temp;
 }
-
-void partition(int* arr, int pivot) // quick sort video we watched in class kind of
+ 
+int partition(int* arr, int low, int high) // utility function to partition the array
 {
-	int i = 0;
-	int j = 0;
-	int temp = 0;
-	while (i <= j)
-	{
-		while (arr[i] < pivot)
-		{
-			i++;
-		}
-		while (arr[j] > pivot)
-		{
-			j--;
-		}
-		if (i < j)
-		{
-			temp = arr[i];
-			arr[i] = arr[j];
-			arr[j] = temp;
-		}
-	}
+    int pivot = arr[high]; // pivot
+ 
+    int i = (low - 1); // Index of smaller element
+ 
+    for (int j = low; j <= high - 1; j++) // loop through the array
+    {
+        if (arr[j] < pivot) // if current element is smaller than the pivot
+        {
+            i++;
+            swap(arr, i, j); // swap arr[i] and arr[j]
+        }
+    }
+    swap(arr, i + 1, high); // swap arr[i+1] and arr[high] (or pivot)
+    return (i + 1); // return the pivot index
+}
+ 
+void QuickSort(int* arr, int low, int high) // main function to sort the array
+{
+    if (low < high) // if the array has more than one element
+    {
+        int pi = partition(arr, low, high); // pi is partitioning index, arr[p] is now at right place
+ 
+        QuickSort(arr, low, pi - 1); // sort the elements before partition
+        QuickSort(arr, pi + 1, high); // sort the elements after partition
+    }
 }
